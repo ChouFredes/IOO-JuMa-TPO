@@ -120,7 +120,7 @@ public class Menu extends JFrame implements ActionListener {
             e.printStackTrace();
         }
 
-        Menu menu = new Menu("Modulo de Proveedores");
+        Menu menu = new Menu("Este es el modulo de Proveedores");
         menu.setVisible(true);
 
     }
