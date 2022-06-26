@@ -3,12 +3,17 @@ package edu.uade.proveedores.model;
 /**
  * @author Grupo 5
  */
-public class OrdenDePago {
+public class OrdenDePago extends GenericModel {
 
     /**
      * Default constructor
      */
     public OrdenDePago() {
+    }
+
+    @Override
+    public String toString() {
+        return null;
     }
 
     /**
