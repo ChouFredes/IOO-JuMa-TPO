@@ -2,9 +2,7 @@ package edu.uade.proveedores.controller;
 
 import edu.uade.proveedores.dao.DocumentoComercialDao;
 import edu.uade.proveedores.dao.OrdenDePagoDao;
-import edu.uade.proveedores.dto.DocumentoComercialDTO;
-import edu.uade.proveedores.dto.EmpleadoDTO;
-import edu.uade.proveedores.dto.ProveedorDTO;
+import edu.uade.proveedores.dto.*;
 import edu.uade.proveedores.enumeration.TipoDocumentoComercial;
 import edu.uade.proveedores.model.DocumentoComercial;
 import edu.uade.proveedores.model.OrdenDePago;
@@ -34,5 +32,9 @@ public class PagoController {
 
     private synchronized void actualizarOrdenesDePago() throws Exception {
         this.ordenDePagoList = (new OrdenDePagoDao()).getAll();
+    }
+
+    public ArrayList<OrdenDePagoDTO> obtenerOrdenesDePagoEmitidas() {
+        return new ArrayList<OrdenDePagoDTO>();
     }
 }
