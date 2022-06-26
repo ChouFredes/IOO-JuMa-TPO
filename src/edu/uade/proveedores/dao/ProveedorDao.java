@@ -1,14 +1,7 @@
 package edu.uade.proveedores.dao;
 
-import edu.uade.proveedores.enumeration.*;
-import edu.uade.proveedores.model.Empleado;
 import edu.uade.proveedores.model.Proveedor;
 
-import java.util.Date;
-
-/**
- * @author Grupo 5
- */
 public class ProveedorDao extends GenericDAO<Proveedor> {
 
     public ProveedorDao() throws Exception {

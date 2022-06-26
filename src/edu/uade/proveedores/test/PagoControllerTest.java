@@ -17,19 +17,19 @@ public class PagoControllerTest {
 
     ProveedorDao daoProveedor;
 
-    @BeforeEach
+    //@BeforeEach
     public void init() throws Exception {
         daoProveedor = new ProveedorDao();
     }
 
-    @Test
+    //@Test
     void constructor(){
 
         Empleado empleado = new Empleado(1,"Alejandro","Romero",1);
         System.out.println(empleado);
     }
 
-    @Test
+    //@Test
     void compraController() throws Exception {
         SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy", Locale.ENGLISH);
         String FCInString = "01-06-2022";
@@ -47,4 +47,5 @@ public class PagoControllerTest {
 
         //el sistema presenta
     }
+
 }

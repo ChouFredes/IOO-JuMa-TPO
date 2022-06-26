@@ -13,6 +13,7 @@ public class OrdenDePago extends GenericModel {
     private Long numeroDeOrden;
     private Float totalACancelar;
     private Float totalDeRetenciones;
+    private boolean estaLiquidada;
 
     public List<DocumentoComercial> getFacturas() {
         return facturas;
@@ -72,6 +73,10 @@ public class OrdenDePago extends GenericModel {
     @Override
     public String toString() {
         return null;
+    }
+
+    public boolean estaLiquidada() {
+        return this.estaLiquidada;
     }
 
 }

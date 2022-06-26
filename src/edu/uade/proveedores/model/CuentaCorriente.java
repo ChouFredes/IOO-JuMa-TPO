@@ -1,7 +1,9 @@
 package edu.uade.proveedores.model;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  * @author Grupo 5
@@ -17,6 +19,10 @@ public class CuentaCorriente extends GenericModel{
     private Float montoDeDeuda;
     private Float montoTotal;
     private Proveedor proveedor;
+    private ArrayList<OrdenDePago> pagosRealizados;
+    private ArrayList<DocumentoComercial> facturasEntregadas;
+    private ArrayList<DocumentoComercial> notasDeDebitoEntregadas;
+    private ArrayList<DocumentoComercial> notasDeCreditoEntregadas;
 
     public CuentaCorriente(int numeroDeCC, Proveedor proveedor, float limiteDeDeudaAcordado, boolean esDeudaSobrepasada, float limiteDeCredito,
                            boolean esCreditoSobrepasado, float montoDeCredito, float montoDeDeuda, float montoTotal) {
@@ -31,6 +37,10 @@ public class CuentaCorriente extends GenericModel{
         this.montoDeCredito = montoDeCredito;
         this.montoDeDeuda = montoDeDeuda;
         this.montoTotal = montoTotal;
+        this.pagosRealizados = new ArrayList<>();
+        this.facturasEntregadas = new ArrayList<>();
+        this.notasDeDebitoEntregadas = new ArrayList<>();
+        this.notasDeCreditoEntregadas = new ArrayList<>();
 
     }
 
@@ -48,6 +58,10 @@ public class CuentaCorriente extends GenericModel{
         this.montoDeCredito = montoDeCredito;
         this.montoDeDeuda = montoDeDeuda;
         this.montoTotal = montoTotal;
+        this.pagosRealizados = new ArrayList<>();
+        this.facturasEntregadas = new ArrayList<>();
+        this.notasDeDebitoEntregadas = new ArrayList<>();
+        this.notasDeCreditoEntregadas = new ArrayList<>();
 
     }
 
@@ -108,6 +122,57 @@ public class CuentaCorriente extends GenericModel{
     }
 
     public Proveedor getProveedor() { return proveedor; }
+
+    public float calcularMontoTotalDeDeuda(){
+        float totalMontoFacturas = calcularTotalMontoFacturas();
+        float totalMontoNotasDeDebito = calculartotalMontoNotasDeDebito();
+        float totalMontoNotasDeCredito = calcularTotalMontoNotasDeCredito();
+        float totalPagosRealizados = calcularTotalMontoPagosRealizados();
+
+        return (totalMontoFacturas + totalMontoNotasDeCredito) - (totalPagosRealizados + totalMontoNotasDeDebito) ;
+    }
+
+    private float calcularTotalMontoPagosRealizados() {
+        float montoTotal = 0;
+
+        for (OrdenDePago op : pagosRealizados) {
+            if (op.estaLiquidada()){
+                montoTotal += op.getTotalACancelar();
+            }
+        }
+
+        return montoTotal;
+    }
+
+    private float calcularTotalMontoNotasDeCredito() {
+        float montoTotal = 0;
+
+        for (DocumentoComercial nc : notasDeCreditoEntregadas) {
+            montoTotal += nc.getPrecioTotal();
+        }
+
+        return montoTotal;
+    }
+
+    private float calculartotalMontoNotasDeDebito() {
+        float montoTotal = 0;
+
+        for (DocumentoComercial nd : notasDeDebitoEntregadas) {
+            montoTotal += nd.getPrecioTotal();
+        }
+
+        return montoTotal;
+    }
+
+    public float calcularTotalMontoFacturas(){
+        float montoTotal = 0;
+
+        for (DocumentoComercial fac : facturasEntregadas) {
+            montoTotal += fac.getPrecioTotal();
+        }
+
+        return montoTotal;
+    }
 
     @Override
     public String toString() {

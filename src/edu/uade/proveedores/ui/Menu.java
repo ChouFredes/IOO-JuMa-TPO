@@ -102,9 +102,9 @@ public class Menu extends JFrame implements ActionListener {
             }
             myApp.setVisible(true);
         } else if (choice.equals("compulsa de precios")) {
-            FrmPlantilla_TotalFacturasPordia myApp = null;
+            FrmCompulsaDePrecios myApp = null;
             try {
-                myApp = new FrmPlantilla_TotalFacturasPordia("compulsa de precios");
+                myApp = new FrmCompulsaDePrecios("compulsa de precios");
             } catch (Exception ex) {
                 throw new RuntimeException(ex);
             }

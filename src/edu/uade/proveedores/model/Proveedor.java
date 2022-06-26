@@ -20,6 +20,7 @@ public class Proveedor extends GenericModel {
     private Date inicioDeActividades;
     private TipoRubro rubro;
     private TipoResponsabilidad responsabilidadIVA;
+    private CuentaCorriente cuentaCorriente;
 
 
     public Proveedor(Long cuit, String razonSocial, String nombreDeFantasia, String direccion, String telefono,
@@ -126,6 +127,14 @@ public class Proveedor extends GenericModel {
     }
     public void setResponsabilidadIVA(TipoResponsabilidad responsabilidadIVA) {
         this.responsabilidadIVA = responsabilidadIVA;
+    }
+
+    public CuentaCorriente getCuentaCorriente() {
+        return cuentaCorriente;
+    }
+
+    public void setCuentaCorriente(CuentaCorriente cuentaCorriente) {
+        this.cuentaCorriente = cuentaCorriente;
     }
 
     @Override

@@ -1,7 +1,6 @@
 package edu.uade.proveedores.dao;
 
 import edu.uade.proveedores.model.CuentaCorriente;
-import edu.uade.proveedores.model.Empleado;
 
 public class CuentaCorrienteDao extends GenericDAO<CuentaCorriente> {
     public CuentaCorrienteDao() throws Exception {
