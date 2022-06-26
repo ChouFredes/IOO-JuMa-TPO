@@ -6,6 +6,7 @@ import edu.uade.proveedores.dto.EmpleadoDTO;
 import edu.uade.proveedores.dto.ProveedorDTO;
 import edu.uade.proveedores.enumeration.TipoDocumentoComercial;
 import edu.uade.proveedores.model.DocumentoComercial;
+import edu.uade.proveedores.model.OrdenDePago;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -17,7 +18,7 @@ import java.util.List;
 public class PagoController {
 
     private static PagoController instance;
-    private List<DocumentoComercial> documentosComerciales;
+    private List<OrdenDePago> ordenDePagoList;
 
     private PagoController() throws Exception {
         actualizarDocumentosComerciales();
@@ -30,8 +31,8 @@ public class PagoController {
         return instance;
     }
 
-    private synchronized void actualizarDocumentosComerciales() throws Exception {
-        this.documentosComerciales = (new DocumentoComercialDao()).getAll();
+    private synchronized void actualizarOrdenesDePago() throws Exception {
+        this.ordenDePagoList = (new DocumentoComercialDao()).getAll();
     }
 
     public ArrayList<DocumentoComercialDTO> getFacturaPorDiaPorProveedor(Date fecha, ProveedorDTO proveedor){
@@ -41,12 +42,12 @@ public class PagoController {
         TipoDocumentoComercial tipoDocumento;
         DocumentoComercialDTO dto;
 
-        for (DocumentoComercial documento: documentosComerciales ) {
-            fechaDocumento = documento.getFechaDeEmision();
-            tipoDocumento = documento.getTipoDeDocumento();
+        for (OrdenDePago odp: ordenDePagoList ) {
+            fechaDocumento = odp.getFechaDeEmision();
+            tipoDocumento = odp.getTipoDeDocumento();
 
-            if (fecha.equals(fechaDocumento) && tipoDocumento == TipoDocumentoComercial.FACTURA & documento.getProveedor().getCuit().equals(proveedor.cuit)){
-                dto = DocumentoComercialDTO.toDTO(documento);
+            if (fecha.equals(fechaDocumento) && tipoDocumento == TipoDocumentoComercial.FACTURA & odp.getProveedor().getCuit().equals(proveedor.cuit)){
+                dto = DocumentoComercialDTO.toDTO(odp);
                 documentos.add(dto);
             }
 
@@ -65,7 +66,7 @@ public class PagoController {
         documento.setAutorizador(empleadoAutorizaDTO.toModel());
 
         daoDocumento.save(documento);
-        this.actualizarDocumentosComerciales();
+        this.actualizarOrdenesDePago();
 
     }
 
@@ -78,7 +79,7 @@ public class PagoController {
         documento.setCreador(empleadoCargaDTO.toModel());
 
         daoDocumento.save(documento);
-        this.actualizarDocumentosComerciales();
+        this.actualizarOrdenesDePago();
 
     }
 

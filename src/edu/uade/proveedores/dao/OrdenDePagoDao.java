@@ -1,21 +1,21 @@
 package edu.uade.proveedores.dao;
 
-import edu.uade.proveedores.model.DocumentoComercial;
+import edu.uade.proveedores.model.OrdenDePago;
 
 /**
  * @author Grupo 5
  */
-public class OrdenDePagoDao extends GenericDAO<DocumentoComercial>{
+public class OrdenDePagoDao extends GenericDAO<OrdenDePago>{
 
     public OrdenDePagoDao() throws Exception {
-        super(DocumentoComercial.class, "DocumentoComercial.json");
+        super(OrdenDePago.class, "OrdenDePago.json");
     }
 
-    public void save(DocumentoComercial documentoComercial) throws Exception {
-        if (this.getById(documentoComercial.getId()) != null){
-            super.update(documentoComercial);
+    public void save(OrdenDePago ordenDePago) throws Exception {
+        if (this.getById(ordenDePago.getId()) != null){
+            super.update(ordenDePago);
         } else {
-            super.save(documentoComercial);
+            super.save(ordenDePago);
         }
     }
 
