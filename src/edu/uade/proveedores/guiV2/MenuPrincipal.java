@@ -45,6 +45,48 @@ public class MenuPrincipal extends JFrame {
                 frame.setVisible(true);
             }
         });
+        cuentaCorrienteProveedoresButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                FrmCCProveedores frame = new FrmCCProveedores(self,"Cuenta Corriente por Proveedor");
+                frame.setVisible(true);
+            }
+        });
+        consultaLibroIVAButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                FrmConsultaLibroIVA frame= new FrmConsultaLibroIVA(self, "Consulta de Libro IVA");
+                frame.setVisible(true);
+            }
+        });
+        totalDeFacturaPorButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                FrmFacturasPorDia frame= new FrmFacturasPorDia(self, "Total de facturas por día");
+                frame.setVisible(true);
+            }
+        });
+        ordenesDePagoEmitidasButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                FrmOrdenesPagoEmit frame = new FrmOrdenesPagoEmit(self, "Ordenes de pago emitidas");
+                frame.setVisible(true);
+            }
+        });
+        totalDeDeudaPorButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                FrmTotalDeudaProveedor frame= new FrmTotalDeudaProveedor(self, "Total de deuda por proveedor");
+                frame.setVisible(true);
+            }
+        });
+        totalDeImpuestosRetenidosButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                FrmTotalImpuestosRet frame = new FrmTotalImpuestosRet(self, "Total de impuestos retenidos");
+                frame.setVisible(true);
+            }
+        });
     }
 
     public static void main(String[] args) {
