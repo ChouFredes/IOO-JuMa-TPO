@@ -7,8 +7,8 @@ import java.util.Date;
 
 public class FrmFacturasPorDia extends JDialog {
 
-    ArrayList<Date> fechas = CompraController.getInstance().obtenerListaFechasFacturas();
-    ArrayList<Long> cuits = ProveedorController.getInstance().obtenerCuitProveedores();
+    private ArrayList<Date> fechas = CompraController.getInstance().obtenerListaFechasFacturas();
+    private ArrayList<Long> cuits = ProveedorController.getInstance().obtenerCuitProveedores();
     private JPanel PnlPrincipal;
     private JComboBox cbProveedores;
     private JComboBox cbFechas;
@@ -27,8 +27,8 @@ public class FrmFacturasPorDia extends JDialog {
         cbProveedores.setModel(modelProveedores);
 
         DefaultComboBoxModel modelFechas = new DefaultComboBoxModel();
-        modelProveedores.addAll(cuits);
-        cbFechas.setModel(modelProveedores);
+        modelFechas.addAll(fechas);
+        cbFechas.setModel(modelFechas);
     }
 
 }

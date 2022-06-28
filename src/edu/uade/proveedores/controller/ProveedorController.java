@@ -31,17 +31,19 @@ public class ProveedorController {
         return instance;
     }
 
-    public DeudaDeProveedorDTO obtenerDeudaPorProveedor(Long cuitProveedor) {
-        DeudaDeProveedorDTO deudaProveedor = new DeudaDeProveedorDTO(0L,0);
+    public ArrayList<DeudaDeProveedorDTO> obtenerDeudaPorProveedor(Long cuitProveedor) {
+        ArrayList<DeudaDeProveedorDTO> deudaDeProveedores = new ArrayList<DeudaDeProveedorDTO>();
 
         for (Proveedor proveedor : proveedores) {
-            if (proveedor.getCuit() == cuitProveedor) {
-                deudaProveedor = new DeudaDeProveedorDTO(proveedor.getCuit(),
-                        proveedor.getCuentaCorriente().calcularMontoTotalDeDeuda());
+            if (cuitProveedor == null || (cuitProveedor != null && proveedor.getCuit() == cuitProveedor)) {
+                deudaDeProveedores.add(
+                        new DeudaDeProveedorDTO(
+                                proveedor.getCuit(),
+                                proveedor.getCuentaCorriente().calcularMontoTotalDeDeuda()));
             }
         }
 
-        return deudaProveedor;
+        return deudaDeProveedores;
     }
     public ArrayList<Long> obtenerCuitProveedores() throws Exception {
         ArrayList<Long> cuits = new ArrayList<Long>();
