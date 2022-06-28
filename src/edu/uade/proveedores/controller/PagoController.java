@@ -17,7 +17,7 @@ import java.util.List;
 public class PagoController {
 
     private static PagoController instance;
-    private List<OrdenDePago> ordenDePagoList;
+    private List<OrdenDePago> ordenesDePago;
 
     private PagoController() throws Exception {
         actualizarOrdenesDePago();
@@ -31,12 +31,17 @@ public class PagoController {
     }
 
     private synchronized void actualizarOrdenesDePago() throws Exception {
-        this.ordenDePagoList = (new OrdenDePagoDao()).getAll();
+        this.ordenesDePago = (new OrdenDePagoDao()).getAll();
     }
 
-    public ArrayList<OrdenDePagoDTO> obtenerOrdenesDePagoEmitidas() {
+    public ArrayList<OrdenDePagoEmitidaDTO> obtenerOrdenesDePagoEmitidas() {
+        ArrayList<OrdenDePagoEmitidaDTO> ordenesEmitidas =  new ArrayList<>();
 
-        return new ArrayList<OrdenDePagoDTO>();
+        for (OrdenDePago orden: ordenesDePago) {
+            ordenesEmitidas.add(OrdenDePagoEmitidaDTO.toDTO(orden));
+        }
+
+        return ordenesEmitidas;
     }
 
 }
