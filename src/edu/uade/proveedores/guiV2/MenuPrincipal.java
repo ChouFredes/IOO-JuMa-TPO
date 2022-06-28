@@ -62,7 +62,12 @@ public class MenuPrincipal extends JFrame {
         totalDeFacturaPorButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                FrmFacturasPorDia frame= new FrmFacturasPorDia(self, "Total de facturas por día");
+                FrmFacturasPorDia frame= null;
+                try {
+                    frame = new FrmFacturasPorDia(self, "Total de facturas por día");
+                } catch (Exception ex) {
+                    throw new RuntimeException(ex);
+                }
                 frame.setVisible(true);
             }
         });

@@ -1,15 +1,11 @@
 package edu.uade.proveedores.controller;
 
-import edu.uade.proveedores.dao.DocumentoComercialDao;
 import edu.uade.proveedores.dao.ProveedorDao;
 import edu.uade.proveedores.dto.DeudaDeProveedorDTO;
-import edu.uade.proveedores.dto.DocumentoComercialDTO;
-import edu.uade.proveedores.enumeration.TipoDocumentoComercial;
-import edu.uade.proveedores.model.CuentaCorriente;
-import edu.uade.proveedores.model.DocumentoComercial;
 import edu.uade.proveedores.model.Proveedor;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -47,5 +43,13 @@ public class ProveedorController {
 
         return deudaProveedor;
     }
-
+    public ArrayList<Long> obtenerCuitProveedores() throws Exception {
+        ArrayList<Long> cuits = new ArrayList<Long>();
+        actualizarProveedores();
+        for (Proveedor proveedor : proveedores) {
+            Long cuit = proveedor.getCuit();
+            cuits.add(cuit);
+            }
+        return cuits;
+    }
 }
