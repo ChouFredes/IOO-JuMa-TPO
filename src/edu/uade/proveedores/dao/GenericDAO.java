@@ -1,12 +1,10 @@
 package edu.uade.proveedores.dao;
 
+import com.google.gson.*;
+
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
-
-import com.google.gson.*;
-
-import javax.lang.model.element.NestingKind;
 
 public abstract class GenericDAO<T> {
     final Class<T> clase;

@@ -83,4 +83,16 @@ public class CompraController {
 
     }
 
+    public ArrayList<Date> obtenerListaFechasFacturas() throws Exception {
+        ArrayList<Date> fechas = new ArrayList<Date>();
+        actualizarDocumentosComerciales();
+        for (DocumentoComercial documento : documentosComerciales) {
+            TipoDocumentoComercial tipoDocumento = documento.getTipoDeDocumento();
+            Date fechaDocumento = documento.getFechaDeEmision();
+            if (!fechas.contains(fechaDocumento) && tipoDocumento == TipoDocumentoComercial.FACTURA) {
+                fechas.add(fechaDocumento);
+            }
+        }
+        return fechas;
+    }
 }

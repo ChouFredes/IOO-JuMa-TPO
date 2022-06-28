@@ -101,14 +101,6 @@ public class Menu extends JFrame implements ActionListener {
                 throw new RuntimeException(ex);
             }
             myApp.setVisible(true);
-        } else if (choice.equals("compulsa de precios")) {
-            FrmCompulsaDePrecios myApp = null;
-            try {
-                myApp = new FrmCompulsaDePrecios("compulsa de precios");
-            } catch (Exception ex) {
-                throw new RuntimeException(ex);
-            }
-            myApp.setVisible(true);
         }
 
     }
