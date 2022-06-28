@@ -13,7 +13,7 @@ public class DeudaDeProveedorDTO extends GenericDTO{
     @Override
     public String toString() {
         return "ProveedorDTO {" +
-                ", cuit = '" + this.cuit + '\'' +
+                " cuit = '" + this.cuit + '\'' +
                 ", deudaTotal = '" + this.deudaTotal + '\'' +
                 " }";
     }
