@@ -19,10 +19,10 @@ public class CuentaCorriente extends GenericModel{
     private Float montoDeDeuda;
     private Float montoTotal;
     private Proveedor proveedor;
-    private ArrayList<OrdenDePago> pagosRealizados;
-    private ArrayList<DocumentoComercial> facturasEntregadas;
-    private ArrayList<DocumentoComercial> notasDeDebitoEntregadas;
-    private ArrayList<DocumentoComercial> notasDeCreditoEntregadas;
+    private List<OrdenDePago> pagosRealizados = new ArrayList<>();
+    private List<DocumentoComercial> facturasEntregadas = new ArrayList<>();
+    private List<DocumentoComercial> notasDeDebitoEntregadas = new ArrayList<>();
+    private List<DocumentoComercial> notasDeCreditoEntregadas = new ArrayList<>();
 
     public CuentaCorriente(int numeroDeCC, Proveedor proveedor, float limiteDeDeudaAcordado, boolean esDeudaSobrepasada, float limiteDeCredito,
                            boolean esCreditoSobrepasado, float montoDeCredito, float montoDeDeuda, float montoTotal) {
@@ -37,10 +37,6 @@ public class CuentaCorriente extends GenericModel{
         this.montoDeCredito = montoDeCredito;
         this.montoDeDeuda = montoDeDeuda;
         this.montoTotal = montoTotal;
-        this.pagosRealizados = new ArrayList<>();
-        this.facturasEntregadas = new ArrayList<>();
-        this.notasDeDebitoEntregadas = new ArrayList<>();
-        this.notasDeCreditoEntregadas = new ArrayList<>();
 
     }
 
@@ -58,10 +54,6 @@ public class CuentaCorriente extends GenericModel{
         this.montoDeCredito = montoDeCredito;
         this.montoDeDeuda = montoDeDeuda;
         this.montoTotal = montoTotal;
-        this.pagosRealizados = new ArrayList<>();
-        this.facturasEntregadas = new ArrayList<>();
-        this.notasDeDebitoEntregadas = new ArrayList<>();
-        this.notasDeCreditoEntregadas = new ArrayList<>();
 
     }
 
@@ -139,7 +131,7 @@ public class CuentaCorriente extends GenericModel{
             pagosRealizados = new ArrayList<>();
 
         for (OrdenDePago op : pagosRealizados) {
-            if (op.estaLiquidada()){
+            if (op.isLiquidada()){
                 montoTotal += op.getTotalACancelar();
             }
         }
