@@ -1,9 +1,18 @@
 package edu.uade.proveedores.guiV2;
 import edu.uade.proveedores.controller.*;
+import edu.uade.proveedores.dao.ProveedorDao;
+import edu.uade.proveedores.dto.DocumentoComercialDTO;
+import edu.uade.proveedores.dto.ProveedorDTO;
+import edu.uade.proveedores.model.Proveedor;
+
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 import java.awt.*;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public class FrmFacturasPorDia extends JDialog {
 
@@ -13,6 +22,11 @@ public class FrmFacturasPorDia extends JDialog {
     private JComboBox cbProveedores;
     private JComboBox cbFechas;
     private JTable tableFacturas;
+    private DefaultTableModel tableModel;
+    private Object[][] data;
+    private String[] columnNames = {"id","fechaEmision","tipo doc","comprobante"};
+    private Date fechaItem;
+    private Long cuitItem;
 
     public FrmFacturasPorDia(Window owner, String titulo) throws Exception {
         super(owner, titulo);
@@ -29,6 +43,45 @@ public class FrmFacturasPorDia extends JDialog {
         DefaultComboBoxModel modelFechas = new DefaultComboBoxModel();
         modelFechas.addAll(fechas);
         cbFechas.setModel(modelFechas);
+
+        ProveedorDao daoProveedor = new ProveedorDao();
+        Proveedor proveedor = daoProveedor.getById("b85ab4c6-64db-4e30-bc37-6cc1e77a20e2");
+        ProveedorDTO proveedorDTO = ProveedorDTO.toDTO(proveedor);
+
+        cbProveedores.addItemListener(new ItemListener() {
+            @Override
+            public void itemStateChanged(ItemEvent e) {
+                cuitItem = (Long) cbProveedores.getSelectedItem();
+            }
+        });
+        cbFechas.addItemListener(new ItemListener() {
+            @Override
+            public void itemStateChanged(ItemEvent e) {
+                fechaItem = (Date) cbFechas.getSelectedItem();
+            }
+        });
+
+        ArrayList<DocumentoComercialDTO> lista = CompraController.getInstance().getFacturaPorDiaPorProveedor(fechaItem, proveedorDTO);
+        data = convertDtoToData(lista);
+        tableModel = new DefaultTableModel(data, columnNames);
+        tableFacturas = new JTable(tableModel);
+        tableFacturas.setAutoCreateRowSorter(true);
+        JScrollPane scrollPane = new JScrollPane(tableFacturas);
+        scrollPane.setPreferredSize(new Dimension(380,280));
+        JPanel panel = new JPanel();
+        panel.add(scrollPane);
+        add(panel,BorderLayout.CENTER);
+    }
+
+    public Object[][] convertDtoToData(List<DocumentoComercialDTO> list) {
+        Object[][] data = new Object[list.size()][5];
+        for (int i = 0; i < list.size(); i++) {
+            data[i][0] = list.get(i).id;
+            data[i][1] = list.get(i).fechaDeEmision.toString();
+            data[i][2] = list.get(i).tipoDeDocumento;
+            data[i][3] = list.get(i).numeroDeComprobante;
+        }
+        return data;
     }
 
 }
