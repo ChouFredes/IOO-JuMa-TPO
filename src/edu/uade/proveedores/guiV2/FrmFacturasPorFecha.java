@@ -10,11 +10,13 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
-public class FrmFacturasPorDia extends JDialog {
+public class FrmFacturasPorFecha extends JDialog {
 
     private ArrayList<Date> fechas = CompraController.getInstance().obtenerListaFechasFacturas();
     private ArrayList<Long> cuits = ProveedorController.getInstance().obtenerCuitProveedores();
@@ -28,7 +30,7 @@ public class FrmFacturasPorDia extends JDialog {
     private Date fechaItem;
     private Long cuitItem;
 
-    public FrmFacturasPorDia(Window owner, String titulo) throws Exception {
+    public FrmFacturasPorFecha(Window owner, String titulo) throws Exception {
         super(owner, titulo);
         this.setModal(true);
         this.setSize(320, 320);
@@ -43,6 +45,9 @@ public class FrmFacturasPorDia extends JDialog {
         DefaultComboBoxModel modelFechas = new DefaultComboBoxModel();
         modelFechas.addAll(fechas);
         cbFechas.setModel(modelFechas);
+
+        SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy", Locale.ENGLISH);
+        Date fecha = formatter.parse("02-06-2022");
 
         ProveedorDao daoProveedor = new ProveedorDao();
         Proveedor proveedor = daoProveedor.getById("b85ab4c6-64db-4e30-bc37-6cc1e77a20e2");
@@ -61,7 +66,7 @@ public class FrmFacturasPorDia extends JDialog {
             }
         });
 
-        ArrayList<DocumentoComercialDTO> lista = CompraController.getInstance().getFacturaPorDiaPorProveedor(fechaItem, proveedorDTO);
+        ArrayList<DocumentoComercialDTO> lista = CompraController.getInstance().getFacturaPorProveedor(11121314151L);
         data = convertDtoToData(lista);
         tableModel = new DefaultTableModel(data, columnNames);
         tableFacturas = new JTable(tableModel);

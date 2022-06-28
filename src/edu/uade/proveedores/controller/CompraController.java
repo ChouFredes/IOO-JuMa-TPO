@@ -56,6 +56,45 @@ public class CompraController {
         return documentos;
     }
 
+    public ArrayList<DocumentoComercialDTO> getFacturaPorFecha(Date fecha){
+
+        ArrayList<DocumentoComercialDTO> documentos = new ArrayList<DocumentoComercialDTO>();
+        Date fechaDocumento;
+        TipoDocumentoComercial tipoDocumento;
+        DocumentoComercialDTO dto;
+
+        for (DocumentoComercial documento: documentosComerciales ) {
+            fechaDocumento = documento.getFechaDeEmision();
+            tipoDocumento = documento.getTipoDeDocumento();
+
+            if (fecha.equals(fechaDocumento) && tipoDocumento == TipoDocumentoComercial.FACTURA){
+                dto = DocumentoComercialDTO.toDTO(documento);
+                documentos.add(dto);
+            }
+
+        }
+
+        return documentos;
+    }
+
+    public ArrayList<DocumentoComercialDTO> getFacturaPorProveedor(Long cuit){
+
+        ArrayList<DocumentoComercialDTO> documentos = new ArrayList<DocumentoComercialDTO>();
+        TipoDocumentoComercial tipoDocumento;
+        DocumentoComercialDTO dto;
+
+        for (DocumentoComercial documento: documentosComerciales ) {
+            tipoDocumento = documento.getTipoDeDocumento();
+
+            if (tipoDocumento == TipoDocumentoComercial.FACTURA & documento.getProveedor().getCuit().equals(cuit)){
+                dto = DocumentoComercialDTO.toDTO(documento);
+                documentos.add(dto);
+            }
+
+        }
+
+        return documentos;
+    }
     public void agregarFacturaConAutorizacion(DocumentoComercialDTO documentoDTO, ProveedorDTO proveedorDTO, EmpleadoDTO empleadoCargaDTO, EmpleadoDTO empleadoAutorizaDTO) throws Exception {
 
         DocumentoComercialDao daoDocumento = new DocumentoComercialDao();
