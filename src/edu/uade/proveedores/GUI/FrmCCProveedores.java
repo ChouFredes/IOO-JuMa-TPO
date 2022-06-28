@@ -1,12 +1,13 @@
-package edu.uade.proveedores.guiV2;
+package edu.uade.proveedores.GUI;
 
 import javax.swing.*;
 import java.awt.*;
 
-public class FrmTotalImpuestosRet extends JDialog {
+public class FrmCCProveedores extends JDialog{
+
     private JPanel PnlPrincipal;
 
-    public FrmTotalImpuestosRet(Window owner, String titulo) {
+    public FrmCCProveedores(Window owner, String titulo) {
         super(owner, titulo);
         this.setModal(true);
         this.setSize(320, 320);

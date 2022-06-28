@@ -1,10 +1,10 @@
-package edu.uade.proveedores.guiV2;
-import edu.uade.proveedores.controller.*;
+package edu.uade.proveedores.GUI;
+import edu.uade.proveedores.controller.CompraController;
+import edu.uade.proveedores.controller.ProveedorController;
 import edu.uade.proveedores.dao.ProveedorDao;
 import edu.uade.proveedores.dto.DocumentoComercialDTO;
 import edu.uade.proveedores.dto.ProveedorDTO;
 import edu.uade.proveedores.model.Proveedor;
-
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
@@ -16,7 +16,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
-public class FrmFacturasPorFecha extends JDialog {
+public class FrmFacturasPorProveedor extends JDialog{
 
     private ArrayList<Date> fechas = CompraController.getInstance().obtenerListaFechasFacturas();
     private ArrayList<Long> cuits = ProveedorController.getInstance().obtenerCuitProveedores();
@@ -30,7 +30,7 @@ public class FrmFacturasPorFecha extends JDialog {
     private Date fechaItem;
     private Long cuitItem;
 
-    public FrmFacturasPorFecha(Window owner, String titulo) throws Exception {
+    public FrmFacturasPorProveedor(Window owner, String titulo) throws Exception {
         super(owner, titulo);
         this.setModal(true);
         this.setSize(320, 320);
