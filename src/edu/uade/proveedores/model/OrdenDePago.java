@@ -15,6 +15,7 @@ public class OrdenDePago extends GenericModel {
     private Float totalDeRetenciones;
 
     private boolean liquidada;
+    private CuentaCorriente cuentaCorriente;
 
     public List<DocumentoComercial> getFacturas() {
         return facturas;
@@ -72,6 +73,14 @@ public class OrdenDePago extends GenericModel {
         this.liquidada = liquidada;
     }
 
+    public CuentaCorriente getCuentaCorriente() {
+        return cuentaCorriente;
+    }
+
+    public void setCuentaCorriente(CuentaCorriente cuentaCorriente) {
+        this.cuentaCorriente = cuentaCorriente;
+    }
+
     public OrdenDePago() {
     }
 
@@ -81,4 +90,15 @@ public class OrdenDePago extends GenericModel {
         return null;
     }
 
+    public int getCantidadDeFacturas() {
+        return facturas.size();
+    }
+
+    public int getCantidadDeNC() {
+        return notasDeCredito.size();
+    }
+
+    public int getCantidadDeND() {
+        return notasDeDebito.size();
+    }
 }
