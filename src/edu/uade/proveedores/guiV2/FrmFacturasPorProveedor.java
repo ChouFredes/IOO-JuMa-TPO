@@ -1,12 +1,10 @@
 package edu.uade.proveedores.guiV2;
-
 import edu.uade.proveedores.controller.CompraController;
 import edu.uade.proveedores.controller.ProveedorController;
 import edu.uade.proveedores.dao.ProveedorDao;
 import edu.uade.proveedores.dto.DocumentoComercialDTO;
 import edu.uade.proveedores.dto.ProveedorDTO;
 import edu.uade.proveedores.model.Proveedor;
-
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
