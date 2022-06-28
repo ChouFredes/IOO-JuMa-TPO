@@ -135,6 +135,9 @@ public class CuentaCorriente extends GenericModel{
     private float calcularTotalMontoPagosRealizados() {
         float montoTotal = 0;
 
+        if (pagosRealizados == null)
+            pagosRealizados = new ArrayList<>();
+
         for (OrdenDePago op : pagosRealizados) {
             if (op.estaLiquidada()){
                 montoTotal += op.getTotalACancelar();
@@ -147,6 +150,9 @@ public class CuentaCorriente extends GenericModel{
     private float calcularTotalMontoNotasDeCredito() {
         float montoTotal = 0;
 
+        if (notasDeCreditoEntregadas == null)
+            notasDeCreditoEntregadas = new ArrayList<>();
+
         for (DocumentoComercial nc : notasDeCreditoEntregadas) {
             montoTotal += nc.getPrecioTotal();
         }
@@ -157,6 +163,9 @@ public class CuentaCorriente extends GenericModel{
     private float calculartotalMontoNotasDeDebito() {
         float montoTotal = 0;
 
+        if (notasDeDebitoEntregadas == null)
+            notasDeDebitoEntregadas = new ArrayList<>();
+
         for (DocumentoComercial nd : notasDeDebitoEntregadas) {
             montoTotal += nd.getPrecioTotal();
         }
@@ -166,6 +175,9 @@ public class CuentaCorriente extends GenericModel{
 
     public float calcularTotalMontoFacturas(){
         float montoTotal = 0;
+
+        if (facturasEntregadas == null)
+            facturasEntregadas = new ArrayList<>();
 
         for (DocumentoComercial fac : facturasEntregadas) {
             montoTotal += fac.getPrecioTotal();
