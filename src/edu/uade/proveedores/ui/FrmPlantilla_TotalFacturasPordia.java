@@ -31,8 +31,7 @@ public class FrmPlantilla_TotalFacturasPordia extends JFrame implements ActionLi
 
         //TEST
         SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy", Locale.ENGLISH);
-        Date fecha = formatter.parse("01-06-2022");
-
+        Date fecha = formatter.parse("02-06-2022");
         ProveedorDao daoProveedor = new ProveedorDao();
         Proveedor proveedor = daoProveedor.getById("b85ab4c6-64db-4e30-bc37-6cc1e77a20e2");
         ProveedorDTO proveedorDTO = ProveedorDTO.toDTO(proveedor);
@@ -52,7 +51,6 @@ public class FrmPlantilla_TotalFacturasPordia extends JFrame implements ActionLi
         JPanel panel = new JPanel();
         panel.add(scrollPane);
         add(panel,BorderLayout.CENTER);
-
 
     }
 

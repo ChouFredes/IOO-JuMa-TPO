@@ -8,6 +8,8 @@ import edu.uade.proveedores.model.Proveedor;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.text.SimpleDateFormat;
@@ -24,6 +26,7 @@ public class FrmFacturasPorFecha extends JDialog {
     private JComboBox cbProveedores;
     private JComboBox cbFechas;
     private JTable tableFacturas;
+    private JButton btnBuscar;
     private DefaultTableModel tableModel;
     private Object[][] data;
     private String[] columnNames = {"id","fechaEmision","tipo doc","comprobante"};
@@ -46,13 +49,6 @@ public class FrmFacturasPorFecha extends JDialog {
         modelFechas.addAll(fechas);
         cbFechas.setModel(modelFechas);
 
-        SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy", Locale.ENGLISH);
-        Date fecha = formatter.parse("02-06-2022");
-
-        ProveedorDao daoProveedor = new ProveedorDao();
-        Proveedor proveedor = daoProveedor.getById("b85ab4c6-64db-4e30-bc37-6cc1e77a20e2");
-        ProveedorDTO proveedorDTO = ProveedorDTO.toDTO(proveedor);
-
         cbProveedores.addItemListener(new ItemListener() {
             @Override
             public void itemStateChanged(ItemEvent e) {
@@ -66,16 +62,30 @@ public class FrmFacturasPorFecha extends JDialog {
             }
         });
 
-        ArrayList<DocumentoComercialDTO> lista = CompraController.getInstance().getFacturaPorProveedor(11121314151L);
-        data = convertDtoToData(lista);
-        tableModel = new DefaultTableModel(data, columnNames);
-        tableFacturas = new JTable(tableModel);
-        tableFacturas.setAutoCreateRowSorter(true);
-        JScrollPane scrollPane = new JScrollPane(tableFacturas);
-        scrollPane.setPreferredSize(new Dimension(380,280));
-        JPanel panel = new JPanel();
-        panel.add(scrollPane);
-        add(panel,BorderLayout.CENTER);
+        btnBuscar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy", Locale.ENGLISH);
+                    Date fecha = formatter.parse("02-06-2022");
+
+                    data = convertDtoToData(CompraController.getInstance().getFacturaPorDiaPorProveedor(fecha, 12345678910L));
+
+                    tableModel = new DefaultTableModel(data, columnNames);
+                    tableFacturas = new JTable(tableModel);
+                    tableFacturas.setAutoCreateRowSorter(true);
+                    JScrollPane scrollPane = new JScrollPane(tableFacturas);
+                    scrollPane.setPreferredSize(new Dimension(380,280));
+                    JPanel panel = new JPanel();
+                    panel.add(scrollPane);
+                    add(panel,BorderLayout.CENTER);
+                    panel.setVisible(true);
+
+                } catch (Exception ex) {
+                    throw new RuntimeException(ex);
+                }
+            }
+        });
     }
 
     public Object[][] convertDtoToData(List<DocumentoComercialDTO> list) {
