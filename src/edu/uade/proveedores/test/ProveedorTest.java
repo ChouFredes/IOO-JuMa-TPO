@@ -20,7 +20,7 @@ public class ProveedorTest {
 
     ProveedorDao dao;
 
-    //@BeforeEach
+    @BeforeEach
     public void init() throws Exception {
         dao = new ProveedorDao();
     }
@@ -38,19 +38,34 @@ public class ProveedorTest {
 
     //@Test
     void saveDao() throws Exception {
+        String IAteInString;
+        Date inicioDeActividades;
+        Proveedor proveedor;
+        CuentaCorriente cuentaCorriente;
 
         SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy", Locale.ENGLISH);
 
-        String IAteInString = "01-01-2022";
-        Date inicioDeActividades = formatter.parse(IAteInString);
+        IAteInString = "03-06-2022";
+        inicioDeActividades = formatter.parse(IAteInString);
 
-        String FCInString = "01-05-2022";
-        Date fechaDeCreacion = formatter.parse(FCInString);
+        proveedor = new Proveedor(11121314151L, "Augusto",
+                "Augusto", "una direccion", "1112569874",
+                "Augusto@proveedores.com", 1L, inicioDeActividades,
+                TipoRubro.Productos_de_reventa, TipoResponsabilidad.Monotributista);
 
-        Proveedor proveedor = new Proveedor("b85ab4c6-64db-4e30-bc37-6cc1e77a20e2", 99999998888L, "razon social",
+        proveedor.setCuentaCorriente((new CuentaCorrienteDao()).getById("56eefb5f-dcb9-4e4b-aaf0-1b724bac5e49"));
+
+        dao.save(proveedor);
+
+        IAteInString = "01-06-2022";
+        inicioDeActividades = formatter.parse(IAteInString);
+
+        proveedor = new Proveedor(99999998888L, "razon social",
                 "nombre de fantasia", "una direccion", "1112569874",
                 "uncorreo@proveedores.com", 1L, inicioDeActividades,
-                TipoRubro.Productos_de_reventa, TipoResponsabilidad.Monotributista, fechaDeCreacion);
+                TipoRubro.Productos_de_reventa, TipoResponsabilidad.Monotributista);
+
+        proveedor.setCuentaCorriente((new CuentaCorrienteDao()).getById("503a6d5a-1fd9-467e-aabd-c5d93eb31217"));
 
         dao.save(proveedor);
         //System.out.println(proveedor.toString());

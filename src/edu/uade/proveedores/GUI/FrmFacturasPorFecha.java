@@ -41,6 +41,15 @@ public class FrmFacturasPorFecha extends JDialog {
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         this.setLocationRelativeTo(null);
 
+        tableModel = new DefaultTableModel(data, columnNames);
+        tableFacturas = new JTable(tableModel);
+        tableFacturas.setAutoCreateRowSorter(true);
+        JScrollPane scrollPane = new JScrollPane(tableFacturas);
+        scrollPane.setPreferredSize(new Dimension(380,280));
+        JPanel panel = new JPanel();
+        panel.add(scrollPane);
+        add(panel,BorderLayout.CENTER);
+
         DefaultComboBoxModel modelProveedores = new DefaultComboBoxModel();
         modelProveedores.addAll(cuits);
         cbProveedores.setModel(modelProveedores);
@@ -66,20 +75,11 @@ public class FrmFacturasPorFecha extends JDialog {
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
-                    SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy", Locale.ENGLISH);
-                    Date fecha = formatter.parse("02-06-2022");
 
-                    data = convertDtoToData(CompraController.getInstance().getFacturaPorDiaPorProveedor(fecha, 12345678910L));
+                    data = convertDtoToData(CompraController.getInstance().getFacturaPorDiaPorProveedor(fechaItem, cuitItem));
 
-                    tableModel = new DefaultTableModel(data, columnNames);
-                    tableFacturas = new JTable(tableModel);
-                    tableFacturas.setAutoCreateRowSorter(true);
-                    JScrollPane scrollPane = new JScrollPane(tableFacturas);
-                    scrollPane.setPreferredSize(new Dimension(380,280));
-                    JPanel panel = new JPanel();
-                    panel.add(scrollPane);
-                    add(panel,BorderLayout.CENTER);
-                    panel.setVisible(true);
+                    tableModel.setDataVector(data, columnNames);
+                    tableModel.fireTableDataChanged();
 
                 } catch (Exception ex) {
                     throw new RuntimeException(ex);

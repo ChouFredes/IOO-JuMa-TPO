@@ -31,6 +31,7 @@ public class CuentaCorrienteTest {
 
     }
 
+    //@Test
     void saveDao() throws Exception {
         SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy", Locale.ENGLISH);
 
@@ -40,18 +41,22 @@ public class CuentaCorrienteTest {
         String FCInString = "01-05-2022";
         Date fechaDeCreacion = formatter.parse(FCInString);
 
-        Proveedor proveedor = new Proveedor("b85ab4c6-64db-4e30-bc37-6cc1e77a20e2", 99999998888L, "razon social",
-                "nombre de fantasia", "una direccion", "1112569874",
-                "uncorreo@proveedores.com", 1L, inicioDeActividades,
-                TipoRubro.Productos_de_reventa, TipoResponsabilidad.Monotributista, fechaDeCreacion);
+        CuentaCorriente cuentaCorriente;
 
-        CuentaCorriente cuentaCorriente = new CuentaCorriente("ab8e9def-5779-4f7f-ad9f-a33cff159d4a",1, proveedor, 1000f,
+        cuentaCorriente = new CuentaCorriente(2, null, 1000f,
                 false, 1000f, false, 0, 0,
-                0, fechaDeCreacion);
+                0);
 
         dao.save(cuentaCorriente);
 
         System.out.println(cuentaCorriente);
 
+        cuentaCorriente = new CuentaCorriente(3, null, 1000f,
+                false, 1000f, false, 0, 0,
+                0);
+
+        dao.save(cuentaCorriente);
+
+        System.out.println(cuentaCorriente);
     }
 }
