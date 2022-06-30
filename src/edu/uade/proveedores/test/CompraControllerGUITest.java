@@ -77,7 +77,7 @@ public class CompraControllerGUITest {
         //gui, empleado se
 
         //test
-        List<DocumentoComercialDTO> documentosDTO = CompraController.getInstance().getFacturaPorDiaPorProveedor(formatter.parse("01-06-2022"), proveedorDTO);
+        List<DocumentoComercialDTO> documentosDTO = CompraController.getInstance().getFacturaPorDiaPorProveedor(formatter.parse("01-06-2022"), proveedorDTO.toModel().getCuit());
         for (DocumentoComercialDTO dto : documentosDTO) {
             System.out.println(dto.toString());
         }
