@@ -9,13 +9,16 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 public class FrmFacturasPorFecha extends JDialog {
 
-    private ArrayList<Date> fechas;
+    private ArrayList<String> fechas;
     private ArrayList<Long> cuits;
     private JPanel PnlPrincipal;
     private JComboBox cbProveedores;
@@ -56,7 +59,16 @@ public class FrmFacturasPorFecha extends JDialog {
         cbFechas.addItemListener(new ItemListener() {
             @Override
             public void itemStateChanged(ItemEvent e) {
-                fechaItem = (Date) cbFechas.getSelectedItem();
+                SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy", Locale.ENGLISH);
+                try {
+                    if (cbFechas.getSelectedItem() != null) {
+                        fechaItem = formatter.parse(cbFechas.getSelectedItem().toString());
+                    } else {
+                        fechaItem = null;
+                    }
+                } catch (ParseException ex) {
+                    throw new RuntimeException(ex);
+                }
             }
         });
 
@@ -79,13 +91,27 @@ public class FrmFacturasPorFecha extends JDialog {
 
     private void inicializarCombos() throws Exception {
 
-        cuits = ProveedorController.getInstance().obtenerCuitProveedores();
+        cuits = new ArrayList<>();
+        cuits.add(null);
+
+        for (Long cuit : ProveedorController.getInstance().obtenerCuitProveedores()) {
+            cuits.add(cuit);
+        }
+        ;
 
         DefaultComboBoxModel modelProveedores = new DefaultComboBoxModel();
         modelProveedores.addAll(cuits);
         cbProveedores.setModel(modelProveedores);
 
-        fechas = CompraController.getInstance().obtenerListaFechasFacturas();
+
+        fechas = new ArrayList<>();
+        fechas.add(null);
+
+        SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
+
+        for (Date fecha : CompraController.getInstance().obtenerListaFechasFacturas()) {
+            fechas.add(formatter.format(fecha));
+        };
 
         DefaultComboBoxModel modelFechas = new DefaultComboBoxModel();
         modelFechas.addAll(fechas);
