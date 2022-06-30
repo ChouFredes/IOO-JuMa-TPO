@@ -73,9 +73,9 @@ public class MenuPrincipal extends JFrame {
         btnODPago.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                FrmOrdenesPagoEmit frame = null;
+                FrmOrdenesPagoEmitidas frame = null;
                 try {
-                    frame = new FrmOrdenesPagoEmit(self, "Ordenes de pago emitidas");
+                    frame = new FrmOrdenesPagoEmitidas(self, "Ordenes de pago emitidas");
                 } catch (ParseException ex) {
                     throw new RuntimeException(ex);
                 } catch (Exception ex) {
