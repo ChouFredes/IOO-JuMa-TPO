@@ -35,57 +35,44 @@ public class CompraController {
         this.documentosComerciales = (new DocumentoComercialDao()).getAll();
     }
 
-    public ArrayList<DocumentoComercialDTO> getFacturaPorDiaPorProveedor(Date fecha, ProveedorDTO proveedor){
+    public ArrayList<DocumentoComercialDTO> getFacturaPorDiaPorProveedor(Date fecha, Long cuitProveedor) {
 
-        ArrayList<DocumentoComercialDTO> documentos = new ArrayList<DocumentoComercialDTO>();
+        ArrayList<DocumentoComercialDTO> documentos = new ArrayList<>();
         Date fechaDocumento;
         TipoDocumentoComercial tipoDocumento;
         DocumentoComercialDTO dto;
 
-        for (DocumentoComercial documento: documentosComerciales ) {
+        for (DocumentoComercial documento : documentosComerciales) {
             fechaDocumento = documento.getFechaDeEmision();
             tipoDocumento = documento.getTipoDeDocumento();
 
-            if (tipoDocumento == TipoDocumentoComercial.FACTURA &&
-                    ((fecha == null && documento.getProveedor().getCuit().equals(proveedor.cuit)) ||
-                            (fecha.equals(fechaDocumento) && proveedor == null) ||
-                            (fecha.equals(fechaDocumento) && documento.getProveedor().getCuit().equals(proveedor.cuit)))) {
-                dto = DocumentoComercialDTO.toDTO(documento);
-                documentos.add(dto);
+            if (tipoDocumento == TipoDocumentoComercial.FACTURA) {
+                if (fecha != null && cuitProveedor == null) {
+                    if (fecha.equals(fechaDocumento)) {
+                        dto = DocumentoComercialDTO.toDTO(documento);
+                        documentos.add(dto);
+                    }
+                } else if (fecha == null && cuitProveedor != null) {
+                    if (documento.getProveedor().getCuit().equals(cuitProveedor)) {
+                        dto = DocumentoComercialDTO.toDTO(documento);
+                        documentos.add(dto);
+                    }
+                } else if (fecha != null & cuitProveedor != null) {
+                    if (fecha.equals(fechaDocumento) && documento.getProveedor().getCuit().equals(cuitProveedor)) {
+                        dto = DocumentoComercialDTO.toDTO(documento);
+                        documentos.add(dto);
+                    }
+                }
             }
-
         }
 
         return documentos;
-    }
 
-    public ArrayList<DocumentoComercialDTO> getFacturaPorDiaPorProveedor(Date fecha, Long cuitProveedor){
-
-        ArrayList<DocumentoComercialDTO> documentos = new ArrayList<DocumentoComercialDTO>();
-        Date fechaDocumento;
-        TipoDocumentoComercial tipoDocumento;
-        DocumentoComercialDTO dto;
-
-        for (DocumentoComercial documento: documentosComerciales ) {
-            fechaDocumento = documento.getFechaDeEmision();
-            tipoDocumento = documento.getTipoDeDocumento();
-
-            if (tipoDocumento == TipoDocumentoComercial.FACTURA &&
-                    ((fecha == null && documento.getProveedor().getCuit().equals(cuitProveedor)) ||
-                            (fecha.equals(fechaDocumento) && cuitProveedor == null) ||
-                            (fecha.equals(fechaDocumento) && documento.getProveedor().getCuit().equals(cuitProveedor)))) {
-                dto = DocumentoComercialDTO.toDTO(documento);
-                documentos.add(dto);
-            }
-
-        }
-
-        return documentos;
     }
 
     public ArrayList<DocumentoComercialDTO> getFacturaPorFecha(Date fecha){
 
-        ArrayList<DocumentoComercialDTO> documentos = new ArrayList<DocumentoComercialDTO>();
+        ArrayList<DocumentoComercialDTO> documentos = new ArrayList<>();
         Date fechaDocumento;
         TipoDocumentoComercial tipoDocumento;
         DocumentoComercialDTO dto;
@@ -106,7 +93,7 @@ public class CompraController {
 
     public ArrayList<DocumentoComercialDTO> getFacturaPorProveedor(Long cuit){
 
-        ArrayList<DocumentoComercialDTO> documentos = new ArrayList<DocumentoComercialDTO>();
+        ArrayList<DocumentoComercialDTO> documentos = new ArrayList<>();
         TipoDocumentoComercial tipoDocumento;
         DocumentoComercialDTO dto;
 
@@ -150,7 +137,7 @@ public class CompraController {
     }
 
     public ArrayList<Date> obtenerListaFechasFacturas() throws Exception {
-        ArrayList<Date> fechas = new ArrayList<Date>();
+        ArrayList<Date> fechas = new ArrayList<>();
         actualizarDocumentosComerciales();
         for (DocumentoComercial documento : documentosComerciales) {
             TipoDocumentoComercial tipoDocumento = documento.getTipoDeDocumento();
