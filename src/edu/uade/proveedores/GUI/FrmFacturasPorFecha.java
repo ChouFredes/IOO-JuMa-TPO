@@ -20,8 +20,8 @@ import java.util.Locale;
 
 public class FrmFacturasPorFecha extends JDialog {
 
-    private ArrayList<Date> fechas = CompraController.getInstance().obtenerListaFechasFacturas();
-    private ArrayList<Long> cuits = ProveedorController.getInstance().obtenerCuitProveedores();
+    private ArrayList<Date> fechas;
+    private ArrayList<Long> cuits;
     private JPanel PnlPrincipal;
     private JComboBox cbProveedores;
     private JComboBox cbFechas;
@@ -50,13 +50,7 @@ public class FrmFacturasPorFecha extends JDialog {
         panel.add(scrollPane);
         add(panel,BorderLayout.CENTER);
 
-        DefaultComboBoxModel modelProveedores = new DefaultComboBoxModel();
-        modelProveedores.addAll(cuits);
-        cbProveedores.setModel(modelProveedores);
-
-        DefaultComboBoxModel modelFechas = new DefaultComboBoxModel();
-        modelFechas.addAll(fechas);
-        cbFechas.setModel(modelFechas);
+        inicializarCombos();
 
         cbProveedores.addItemListener(new ItemListener() {
             @Override
@@ -86,6 +80,22 @@ public class FrmFacturasPorFecha extends JDialog {
                 }
             }
         });
+    }
+
+    private void inicializarCombos() throws Exception {
+
+        cuits = ProveedorController.getInstance().obtenerCuitProveedores();
+
+        DefaultComboBoxModel modelProveedores = new DefaultComboBoxModel();
+        modelProveedores.addAll(cuits);
+        cbProveedores.setModel(modelProveedores);
+
+        fechas = CompraController.getInstance().obtenerListaFechasFacturas();
+
+        DefaultComboBoxModel modelFechas = new DefaultComboBoxModel();
+        modelFechas.addAll(fechas);
+        cbFechas.setModel(modelFechas);
+
     }
 
     public Object[][] convertDtoToData(List<DocumentoComercialDTO> list) {
