@@ -7,16 +7,14 @@ import java.text.ParseException;
 
 public class MenuPrincipal extends JFrame {
     private JPanel PnlPrincipal;
-    private JPanel PnlTitulo;
-    private JPanel Cuerpo;
-    private JButton totalDeFacturaPorButton;
-    private JButton cuentaCorrienteProveedoresButton;
-    private JButton totalDeImpuestosRetenidosButton;
-    private JButton compulsaDePreciosButton;
-    private JButton totalDeDeudaPorButton;
-    private JButton consultaLibroIVAButton;
-    private JButton ordenesDePagoEmitidasButton;
-
+    private JButton button8;
+    private JButton btnFacturas;
+    private JButton btnODPago;
+    private JButton btnCCorriente;
+    private JButton btnCompulsa;
+    private JButton btnLibroIVA;
+    private JButton btnImpuestos;
+    private JButton btnDeuda;
     private MenuPrincipal self;
 
     public MenuPrincipal(String titulo)
@@ -39,28 +37,28 @@ public class MenuPrincipal extends JFrame {
         this.setLocationRelativeTo(null);
         this.self=this;
 
-        compulsaDePreciosButton.addActionListener(new ActionListener() {
+        btnCompulsa.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 FrmCompulsaPrecios frame= new FrmCompulsaPrecios(self, "Compulsa de Precios");
                 frame.setVisible(true);
             }
         });
-        cuentaCorrienteProveedoresButton.addActionListener(new ActionListener() {
+        btnCCorriente.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 FrmCCProveedores frame = new FrmCCProveedores(self,"Cuenta Corriente por Proveedor");
                 frame.setVisible(true);
             }
         });
-        consultaLibroIVAButton.addActionListener(new ActionListener() {
+        btnLibroIVA.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 FrmConsultaLibroIVA frame= new FrmConsultaLibroIVA(self, "Consulta de Libro IVA");
                 frame.setVisible(true);
             }
         });
-        totalDeFacturaPorButton.addActionListener(new ActionListener() {
+        btnFacturas.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 FrmFacturasPorFecha frame= null;
@@ -72,12 +70,12 @@ public class MenuPrincipal extends JFrame {
                 frame.setVisible(true);
             }
         });
-        ordenesDePagoEmitidasButton.addActionListener(new ActionListener() {
+        btnODPago.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                FrmOrdenesPagoEmitidas frame = null;
+                FrmOrdenesPagoEmit frame = null;
                 try {
-                    frame = new FrmOrdenesPagoEmitidas(self, "Ordenes de pago emitidas");
+                    frame = new FrmOrdenesPagoEmit(self, "Ordenes de pago emitidas");
                 } catch (ParseException ex) {
                     throw new RuntimeException(ex);
                 } catch (Exception ex) {
@@ -86,7 +84,7 @@ public class MenuPrincipal extends JFrame {
                 frame.setVisible(true);
             }
         });
-        totalDeDeudaPorButton.addActionListener(new ActionListener() {
+        btnDeuda.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 FrmTotalDeudaProveedor frame= null;
@@ -98,7 +96,7 @@ public class MenuPrincipal extends JFrame {
                 frame.setVisible(true);
             }
         });
-        totalDeImpuestosRetenidosButton.addActionListener(new ActionListener() {
+        btnImpuestos.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 FrmTotalImpuestosRet frame = new FrmTotalImpuestosRet(self, "Total de impuestos retenidos");

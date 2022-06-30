@@ -2,96 +2,93 @@
 <form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="edu.uade.proveedores.gui.MenuPrincipal">
   <grid id="27dc6" binding="PnlPrincipal" layout-manager="BorderLayout" hgap="0" vgap="0">
     <constraints>
-      <xy x="20" y="20" width="574" height="400"/>
+      <xy x="20" y="20" width="568" height="317"/>
     </constraints>
-    <properties/>
+    <properties>
+      <background color="-16751201"/>
+      <enabled value="true"/>
+    </properties>
     <border type="none"/>
     <children>
-      <grid id="65b32" binding="PnlTitulo" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
-        <margin top="0" left="0" bottom="0" right="0"/>
+      <component id="4b081" class="javax.swing.JLabel">
         <constraints border-constraint="North"/>
         <properties>
-          <background color="-12090482"/>
-          <font name="Consolas"/>
-          <preferredSize width="24" height="40"/>
+          <font size="28"/>
+          <horizontalAlignment value="0"/>
+          <horizontalTextPosition value="0"/>
+          <text value="MENÚ PRINCIPAL"/>
         </properties>
-        <border type="etched"/>
-        <children>
-          <component id="9cfb" class="javax.swing.JLabel">
-            <constraints>
-              <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
-            </constraints>
-            <properties>
-              <font name="Book Antiqua" size="26" style="1"/>
-              <text value="Menú Principal: Sistema de Proveedores"/>
-            </properties>
-          </component>
-        </children>
-      </grid>
-      <grid id="c57c" binding="Cuerpo" layout-manager="GridLayoutManager" row-count="3" column-count="3" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+      </component>
+      <grid id="9771" layout-manager="GridLayoutManager" row-count="8" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
         <margin top="0" left="0" bottom="0" right="0"/>
         <constraints border-constraint="Center"/>
-        <properties/>
+        <properties>
+          <background color="-14382706"/>
+        </properties>
         <border type="none"/>
         <children>
-          <component id="aa225" class="javax.swing.JButton" binding="totalDeFacturaPorButton" default-binding="true">
+          <component id="d85fe" class="javax.swing.JButton" binding="btnFacturas">
             <constraints>
-              <grid row="0" column="0" row-span="1" col-span="2" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false">
-                <preferred-size width="161" height="137"/>
-              </grid>
+              <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
-              <text value="Total de Factura por día "/>
+              <text value="Total de facturas por día y/o proveedor"/>
             </properties>
           </component>
-          <component id="73e75" class="javax.swing.JButton" binding="cuentaCorrienteProveedoresButton" default-binding="true">
+          <component id="73f61" class="javax.swing.JButton" binding="btnODPago">
             <constraints>
-              <grid row="0" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false">
-                <preferred-size width="192" height="137"/>
-              </grid>
+              <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
-              <text value="Cuenta Corriente Proveedores"/>
+              <text value="Ordenes de pagos emitidas"/>
             </properties>
           </component>
-          <component id="cbc9e" class="javax.swing.JButton" binding="totalDeImpuestosRetenidosButton" default-binding="true">
+          <component id="3e474" class="javax.swing.JButton" binding="btnCCorriente">
             <constraints>
-              <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+              <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <text value="Cuenta corriente de proveedores"/>
+            </properties>
+          </component>
+          <component id="41393" class="javax.swing.JButton" binding="btnCompulsa">
+            <constraints>
+              <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <text value="Compulsa de precios"/>
+            </properties>
+          </component>
+          <component id="634a8" class="javax.swing.JButton" binding="btnLibroIVA">
+            <constraints>
+              <grid row="4" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <text value="Libro IVA"/>
+            </properties>
+          </component>
+          <component id="3c95c" class="javax.swing.JButton" binding="btnImpuestos">
+            <constraints>
+              <grid row="5" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
               <text value="Total de impuestos retenidos"/>
             </properties>
           </component>
-          <component id="888c3" class="javax.swing.JButton" binding="compulsaDePreciosButton" default-binding="true">
+          <component id="de684" class="javax.swing.JButton" binding="btnDeuda">
             <constraints>
-              <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+              <grid row="6" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
-              <text value="Compulsa de Precios"/>
+              <text value="Total de deuda por proveedor"/>
             </properties>
           </component>
-          <component id="83912" class="javax.swing.JButton" binding="totalDeDeudaPorButton" default-binding="true">
+          <component id="5ce86" class="javax.swing.JButton" binding="button8" default-binding="true">
             <constraints>
-              <grid row="1" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+              <grid row="7" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
-              <text value="Total de deuda por Proveedor"/>
-            </properties>
-          </component>
-          <component id="ede5e" class="javax.swing.JButton" binding="consultaLibroIVAButton" default-binding="true">
-            <constraints>
-              <grid row="2" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
-            </constraints>
-            <properties>
-              <text value="Consulta libro IVA"/>
-            </properties>
-          </component>
-          <component id="811e4" class="javax.swing.JButton" binding="ordenesDePagoEmitidasButton" default-binding="true">
-            <constraints>
-              <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
-            </constraints>
-            <properties>
-              <text value="Ordenes de pago emitidas"/>
+              <text value="Button"/>
             </properties>
           </component>
         </children>
