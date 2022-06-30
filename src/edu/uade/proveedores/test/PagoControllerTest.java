@@ -43,7 +43,7 @@ public class PagoControllerTest {
         //el ususario inserta una fecha
         //el ususario presiona el boton buscarPorFecha
 
-        System.out.println(CompraController.getInstance().getFacturaPorDiaPorProveedor(fecha, proveedorDTO));
+        System.out.println(CompraController.getInstance().getFacturaPorDiaPorProveedor(fecha, proveedorDTO.cuit));
 
         //el sistema presenta
     }

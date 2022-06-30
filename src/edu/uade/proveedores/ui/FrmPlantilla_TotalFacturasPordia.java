@@ -38,7 +38,7 @@ public class FrmPlantilla_TotalFacturasPordia extends JFrame implements ActionLi
         //TEST
 
         controller = CompraController.getInstance();
-        ArrayList<DocumentoComercialDTO> lista = controller.getFacturaPorDiaPorProveedor(fecha, proveedorDTO);
+        ArrayList<DocumentoComercialDTO> lista = controller.getFacturaPorDiaPorProveedor(fecha, proveedorDTO.cuit);
 
         data = convertDtoToData(lista);
 
