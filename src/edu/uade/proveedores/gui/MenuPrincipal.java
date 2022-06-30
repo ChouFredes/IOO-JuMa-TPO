@@ -81,7 +81,12 @@ public class MenuPrincipal extends JFrame {
         totalDeDeudaPorButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                FrmTotalDeudaProveedor frame= new FrmTotalDeudaProveedor(self, "Total de deuda por proveedor");
+                FrmTotalDeudaProveedor frame= null;
+                try {
+                    frame = new FrmTotalDeudaProveedor(self, "Total de deuda por proveedor");
+                } catch (Exception ex) {
+                    throw new RuntimeException(ex);
+                }
                 frame.setVisible(true);
             }
         });
