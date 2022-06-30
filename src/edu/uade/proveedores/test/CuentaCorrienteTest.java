@@ -49,7 +49,7 @@ public class CuentaCorrienteTest {
 
         CuentaCorriente cuentaCorriente;
 
-        cuentaCorriente = new CuentaCorriente(2, null, 1000f,
+        cuentaCorriente = new CuentaCorriente(2, 1000f,
                 false, 1000f, false, 0, 0,
                 0);
 
@@ -57,7 +57,7 @@ public class CuentaCorrienteTest {
 
         System.out.println(cuentaCorriente);
 
-        cuentaCorriente = new CuentaCorriente(3, null, 1000f,
+        cuentaCorriente = new CuentaCorriente(3, 1000f,
                 false, 1000f, false, 0, 0,
                 0);
 
@@ -70,14 +70,16 @@ public class CuentaCorrienteTest {
     public void crearCuentaCorrienteTest() throws Exception {
         SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy", Locale.ENGLISH);
         CuentaCorriente cc = (new CuentaCorrienteDao()).getById("c7bcc677-106c-4542-a2b6-a37d4fb1dd7f");
-        Proveedor proveedor = (new ProveedorDao()).getById("1c017327-59fa-4cf7-b297-6f2fa170c4ab");
-        proveedor.setCuentaCorriente(cc);
-        (new ProveedorDao()).save(proveedor);
-        cc.setProveedor(proveedor);
+        (new CuentaCorrienteDao()).save(cc);
 
-        OrdenDePago ordenDePago = (new OrdenDePagoDao()).getById("cbb77902-08d4-4b55-a457-760548ea8abf");
-        ordenDePago.setCuentaCorriente(cc);
-        (new OrdenDePagoDao()).save(ordenDePago);
+        //Proveedor proveedor = (new ProveedorDao()).getById("1c017327-59fa-4cf7-b297-6f2fa170c4ab");
+        //proveedor.setCuentaCorriente(cc);
+        //(new ProveedorDao()).save(proveedor);
+        //cc.setProveedor(proveedor);
+
+        //OrdenDePago ordenDePago = (new OrdenDePagoDao()).getById("cbb77902-08d4-4b55-a457-760548ea8abf");
+        //ordenDePago.setCuentaCorriente(cc);
+        //(new OrdenDePagoDao()).save(ordenDePago);
 
         /*
         DocumentoComercial dc = (new DocumentoComercialDao()).getById("14f836d1-3d7a-41cb-b126-48513771771a");

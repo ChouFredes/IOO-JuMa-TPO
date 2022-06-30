@@ -7,7 +7,6 @@ import java.text.ParseException;
 
 public class MenuPrincipal extends JFrame {
     private JPanel PnlPrincipal;
-    private JButton button8;
     private JButton btnFacturas;
     private JButton btnODPago;
     private JButton btnCCorriente;
@@ -41,21 +40,21 @@ public class MenuPrincipal extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 FrmCompulsaPrecios frame= new FrmCompulsaPrecios(self, "Compulsa de Precios");
-                frame.setVisible(true);
+                frame.setVisible(false);
             }
         });
         btnCCorriente.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 FrmCCProveedores frame = new FrmCCProveedores(self,"Cuenta Corriente por Proveedor");
-                frame.setVisible(true);
+                frame.setVisible(false);
             }
         });
         btnLibroIVA.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 FrmConsultaLibroIVA frame= new FrmConsultaLibroIVA(self, "Consulta de Libro IVA");
-                frame.setVisible(true);
+                frame.setVisible(false);
             }
         });
         btnFacturas.addActionListener(new ActionListener() {
@@ -100,9 +99,14 @@ public class MenuPrincipal extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 FrmTotalImpuestosRet frame = new FrmTotalImpuestosRet(self, "Total de impuestos retenidos");
-                frame.setVisible(true);
+                frame.setVisible(false);
             }
         });
+
+        btnCCorriente.setVisible(false);
+        btnCompulsa.setVisible(false);
+        btnLibroIVA.setVisible(false);
+        btnImpuestos.setVisible(false);
     }
 
     public static void main(String[] args) {

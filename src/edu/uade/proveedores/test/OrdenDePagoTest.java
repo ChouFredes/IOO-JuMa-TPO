@@ -19,16 +19,17 @@ public class OrdenDePagoTest {
         SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy", Locale.ENGLISH);
         CuentaCorriente cc = (new CuentaCorrienteDao()).getById("c7bcc677-106c-4542-a2b6-a37d4fb1dd7f");
         DocumentoComercial dc = (new DocumentoComercialDao()).getById("14f836d1-3d7a-41cb-b126-48513771771a");
-        OrdenDePago op = (new OrdenDePago(1L, cc, formatter.parse("01-06-2022")));
+        //OrdenDePago op = (new OrdenDePago(1L, cc, formatter.parse("01-06-2022")));
         ArrayList<DocumentoComercial> facturas = new ArrayList<>();
         facturas.add(dc);
-        op.setFacturas(facturas);
-        (new OrdenDePagoDao()).save(op);
+        //op.setFacturas(facturas);
+        //(new OrdenDePagoDao()).save(op);
     }
 
     @Test
     public void obtenerOrdenDePagoTest() throws Exception {
         OrdenDePago ordenDePago = (new OrdenDePagoDao()).getById("cbb77902-08d4-4b55-a457-760548ea8abf");
+        (new OrdenDePagoDao()).save(ordenDePago);
 
         System.out.println(ordenDePago);
     }

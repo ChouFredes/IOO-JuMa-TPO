@@ -2,6 +2,8 @@ package edu.uade.proveedores.controller;
 
 import edu.uade.proveedores.dao.ProveedorDao;
 import edu.uade.proveedores.dto.DeudaDeProveedorDTO;
+import edu.uade.proveedores.dto.OrdenDePagoEmitidaDTO;
+import edu.uade.proveedores.model.OrdenDePago;
 import edu.uade.proveedores.model.Proveedor;
 
 import java.util.ArrayList;
@@ -54,4 +56,20 @@ public class ProveedorController {
             }
         return cuits;
     }
+
+    public ArrayList<OrdenDePagoEmitidaDTO> obtenerOrdenesDePagoEmitidas() {
+        ArrayList<OrdenDePagoEmitidaDTO> ordenesEmitidas =  new ArrayList<>();
+
+        for (Proveedor proveedor: proveedores) {
+            for (OrdenDePago orden : proveedor.getCuentaCorriente().getPagosRealizados()) {
+                ordenesEmitidas.add(new OrdenDePagoEmitidaDTO(orden.getNumeroDeOrden(), orden.getFechaDeEmision(), proveedor.getCuit(),
+                        proveedor.getRazonSocial(),
+                        proveedor.getCuentaCorriente().getNumeroDeCC(), orden.getCantidadDeFacturas(), orden.getCantidadDeNC(),
+                        orden.getCantidadDeND(), orden.getTotalACancelar(), orden.getTotalDeRetenciones(), orden.isLiquidada()));
+            }
+        }
+
+        return ordenesEmitidas;
+    }
+
 }

@@ -1,12 +1,12 @@
 package edu.uade.proveedores.test;
 
 import edu.uade.proveedores.controller.ProveedorController;
-import edu.uade.proveedores.dao.CuentaCorrienteDao;
-import edu.uade.proveedores.dao.EmpleadoDao;
-import edu.uade.proveedores.dao.ProveedorDao;
+import edu.uade.proveedores.dao.*;
 import edu.uade.proveedores.enumeration.TipoResponsabilidad;
 import edu.uade.proveedores.enumeration.TipoRubro;
 import edu.uade.proveedores.model.CuentaCorriente;
+import edu.uade.proveedores.model.DocumentoComercial;
+import edu.uade.proveedores.model.OrdenDePago;
 import edu.uade.proveedores.model.Proveedor;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -76,7 +76,7 @@ public class ProveedorTest {
         ProveedorController.getInstance();
     }
 
-    @Test
+    //@Test
     void obtenerDeudaDeProveedorTest() throws Exception {
 
         ProveedorDao pDao = new ProveedorDao();
@@ -89,6 +89,57 @@ public class ProveedorTest {
         //proveedor.setCuentaCorriente(cuentaCorriente);
         //pDao.save(proveedor);
 
+    }
+
+    @Test
+    public void obtenerOrdenesDePagoTest() throws Exception {
+        SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy", Locale.ENGLISH);
+
+        Proveedor proveedor = (new ProveedorDao()).getById("1aeb593f-1108-4c48-8369-b6576c0da190");
+        CuentaCorriente cc = (new CuentaCorrienteDao()).getById("56eefb5f-dcb9-4e4b-aaf0-1b724bac5e49");
+        DocumentoComercial factura = (new DocumentoComercialDao()).getById("14f836d1-3d7a-41cb-b126-48513771771a");
+
+        OrdenDePago op = (new OrdenDePago(2L,formatter.parse("01-01-2022")));
+
+        factura.setProveedor(proveedor);
+
+        cc.agregarFactura(factura);
+        op.agregarFactura(factura);
+
+        cc.agregarOrdeDePago(op);
+        proveedor.setCuentaCorriente(cc);
+
+        (new OrdenDePagoDao()).save(op);
+        (new ProveedorDao()).save(proveedor);
+
+        //OrdenDePago ordenDePago = (new OrdenDePagoDao()).getById("cbb77902-08d4-4b55-a457-760548ea8abf");
+        //cc.agregarOrdeDePago(ordenDePago);
+        //(new CuentaCorrienteDao()).save(cc);
+
+        //DocumentoComercial dc = (new DocumentoComercialDao()).getById("14f836d1-3d7a-41cb-b126-48513771771a");
+        //OrdenDePago op = (new OrdenDePago(1L, cc, formatter.parse("01-06-2022")));
+        //ArrayList<DocumentoComercial> facturas = new ArrayList<>();
+        //facturas.add(dc);
+        //op.setFacturas(facturas);
+        //(new OrdenDePagoDao()).save(op);
+
+        //(new CuentaCorrienteDao()).save(cc);
+
+        //Proveedor proveedor = (new ProveedorDao()).getById("1c017327-59fa-4cf7-b297-6f2fa170c4ab");
+        //proveedor.setCuentaCorriente(cc);
+        //(new ProveedorDao()).save(proveedor);
+        //cc.setProveedor(proveedor);
+
+        //(new OrdenDePagoDao()).save(ordenDePago);
+
+        /*
+        DocumentoComercial dc = (new DocumentoComercialDao()).getById("14f836d1-3d7a-41cb-b126-48513771771a");
+        cc.setProveedor(dc.getProveedor());
+        OrdenDePago op = (new OrdenDePagoDao()).getById("cbb77902-08d4-4b55-a457-760548ea8abf");
+        cc.setFacturasEntregadas(op.getFacturas());
+        cc.agregarOrdeDePago(op);
+        */
+        //(new CuentaCorrienteDao()).save(cc);
     }
 
 }

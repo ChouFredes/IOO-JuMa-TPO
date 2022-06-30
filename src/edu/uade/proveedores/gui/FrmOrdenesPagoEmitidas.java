@@ -1,6 +1,7 @@
 package edu.uade.proveedores.gui;
 
 import edu.uade.proveedores.controller.PagoController;
+import edu.uade.proveedores.controller.ProveedorController;
 import edu.uade.proveedores.dto.OrdenDePagoEmitidaDTO;
 
 import javax.swing.*;
@@ -30,7 +31,7 @@ public class FrmOrdenesPagoEmitidas extends JDialog {
         //this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         this.setLocationRelativeTo(null);
 
-        data = convertDtoToData(PagoController.getInstance().obtenerOrdenesDePagoEmitidas());
+        data = convertDtoToData(ProveedorController.getInstance().obtenerOrdenesDePagoEmitidas());
 
         tableModel = new DefaultTableModel(data, columnNames);
         tableOrdenesEmitidas = new JTable(tableModel);

@@ -66,6 +66,11 @@ public class FrmTotalDeudaProveedor extends  JDialog{
         btnLimpiar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                try {
+                    inicializarCombo();
+                } catch (Exception ex) {
+                    throw new RuntimeException(ex);
+                }
             }
         });
     }

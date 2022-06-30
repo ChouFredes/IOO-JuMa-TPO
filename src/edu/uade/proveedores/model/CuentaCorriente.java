@@ -1,5 +1,7 @@
 package edu.uade.proveedores.model;
 
+import edu.uade.proveedores.enumeration.TipoDocumentoComercial;
+
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -18,15 +20,12 @@ public class CuentaCorriente extends GenericModel{
     private Float montoDeCredito;
     private Float montoDeDeuda;
     private Float montoTotal;
-    private Proveedor proveedor;
     private List<OrdenDePago> pagosRealizados = new ArrayList<>();
     private List<DocumentoComercial> facturasEntregadas = new ArrayList<>();
     private List<DocumentoComercial> notasDeDebitoEntregadas = new ArrayList<>();
     private List<DocumentoComercial> notasDeCreditoEntregadas = new ArrayList<>();
 
-    public void setProveedor(Proveedor proveedor) {
-        this.proveedor = proveedor;
-    }
+    //public void setProveedor(Proveedor proveedor) {this.proveedor = proveedor;}
 
     public List<OrdenDePago> getPagosRealizados() {
         return pagosRealizados;
@@ -60,12 +59,12 @@ public class CuentaCorriente extends GenericModel{
         this.notasDeCreditoEntregadas = notasDeCreditoEntregadas;
     }
 
-    public CuentaCorriente(int numeroDeCC, Proveedor proveedor, float limiteDeDeudaAcordado, boolean esDeudaSobrepasada, float limiteDeCredito,
+    public CuentaCorriente(int numeroDeCC, float limiteDeDeudaAcordado, boolean esDeudaSobrepasada, float limiteDeCredito,
                            boolean esCreditoSobrepasado, float montoDeCredito, float montoDeDeuda, float montoTotal) {
 
         super();
         this.numeroDeCC = numeroDeCC;
-        this.proveedor = proveedor;
+        //this.proveedor = proveedor;
         this.limiteDeDeudaAcordado = limiteDeDeudaAcordado;
         this.esDeudaSobrepasada = esDeudaSobrepasada;
         this.limiteDeCredito = limiteDeCredito;
@@ -76,13 +75,13 @@ public class CuentaCorriente extends GenericModel{
 
     }
 
-    public CuentaCorriente(String id, int numeroDeCC, Proveedor proveedor, float limiteDeDeudaAcordado, boolean esDeudaSobrepasada, float limiteDeCredito,
+    public CuentaCorriente(String id, int numeroDeCC, float limiteDeDeudaAcordado, boolean esDeudaSobrepasada, float limiteDeCredito,
                            boolean esCreditoSobrepasado, float montoDeCredito, float montoDeDeuda, float montoTotal,
                            Date fechaDeCreacion) {
 
         super(id,fechaDeCreacion);
         this.numeroDeCC = numeroDeCC;
-        this.proveedor = proveedor;
+        //this.proveedor = proveedor;
         this.limiteDeDeudaAcordado = limiteDeDeudaAcordado;
         this.esDeudaSobrepasada = esDeudaSobrepasada;
         this.limiteDeCredito = limiteDeCredito;
@@ -148,8 +147,6 @@ public class CuentaCorriente extends GenericModel{
     public void setMontoTotal(Float montoTotal) {
         this.montoTotal = montoTotal;
     }
-
-    public Proveedor getProveedor() { return proveedor; }
 
     public float calcularMontoTotalDeDeuda(){
         float totalMontoFacturas = calcularTotalMontoFacturas();
@@ -221,7 +218,6 @@ public class CuentaCorriente extends GenericModel{
         return "CuentaCorriente {" +
                 " id = '" + this.id + '\'' +
                 ", numeroDeCC = '" + this.numeroDeCC + '\'' +
-                ", proveedor = '" + this.proveedor + '\'' +
                 ", limiteDeDeudaAcordado = '" + this.limiteDeDeudaAcordado + '\'' +
                 ", esDeudaSobrepasada = '" + this.esDeudaSobrepasada + '\'' +
                 ", limiteDeCredito = '" + this.limiteDeCredito + '\'' +
@@ -236,5 +232,10 @@ public class CuentaCorriente extends GenericModel{
 
     public void agregarOrdeDePago(OrdenDePago ordenDePago) {
         pagosRealizados.add(ordenDePago);
+    }
+
+    public void agregarFactura(DocumentoComercial factura) {
+        if (factura.getTipoDeDocumento() == TipoDocumentoComercial.FACTURA)
+            facturasEntregadas.add(factura);
     }
 }

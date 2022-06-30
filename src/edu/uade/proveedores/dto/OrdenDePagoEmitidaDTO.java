@@ -1,6 +1,7 @@
 package edu.uade.proveedores.dto;
 
 import edu.uade.proveedores.model.OrdenDePago;
+import edu.uade.proveedores.model.Proveedor;
 
 import java.util.Date;
 
@@ -32,13 +33,6 @@ public class OrdenDePagoEmitidaDTO extends GenericDTO {
         this.totalACancelar = totalACancelar;
         this.totalDeRetenciones = totalDeRetenciones;
         this.liquidada = liquidada;
-    }
-
-    public static OrdenDePagoEmitidaDTO toDTO(OrdenDePago orden) {
-        return new OrdenDePagoEmitidaDTO(orden.getNumeroDeOrden(), orden.getFechaDeEmision(), orden.getCuentaCorriente().getProveedor().getCuit(),
-                orden.getCuentaCorriente().getProveedor().getRazonSocial(),
-                orden.getCuentaCorriente().getNumeroDeCC(), orden.getCantidadDeFacturas(), orden.getCantidadDeNC(),
-                orden.getCantidadDeND(), orden.getTotalACancelar(), orden.getTotalDeRetenciones(), orden.isLiquidada());
     }
 
     @Override

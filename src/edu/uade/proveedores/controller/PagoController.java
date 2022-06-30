@@ -30,14 +30,4 @@ public class PagoController {
         this.ordenesDePago = (new OrdenDePagoDao()).getAll();
     }
 
-    public ArrayList<OrdenDePagoEmitidaDTO> obtenerOrdenesDePagoEmitidas() {
-        ArrayList<OrdenDePagoEmitidaDTO> ordenesEmitidas =  new ArrayList<>();
-
-        for (OrdenDePago orden: ordenesDePago) {
-            ordenesEmitidas.add(OrdenDePagoEmitidaDTO.toDTO(orden));
-        }
-
-        return ordenesEmitidas;
-    }
-
 }

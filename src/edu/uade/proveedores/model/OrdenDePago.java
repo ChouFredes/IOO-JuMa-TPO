@@ -1,14 +1,17 @@
 package edu.uade.proveedores.model;
+import edu.uade.proveedores.enumeration.TipoDocumentoComercial;
+
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 /**
  * @author Grupo 5
  */
 public class OrdenDePago extends GenericModel {
-    List<DocumentoComercial> facturas;
-    List<DocumentoComercial> notasDeCredito;
-    List<DocumentoComercial> notasDeDebito;
+    List<DocumentoComercial> facturas = new ArrayList<>();
+    List<DocumentoComercial> notasDeCredito = new ArrayList<>();
+    List<DocumentoComercial> notasDeDebito = new ArrayList<>();
     private Long numeroDeOrden;
     public Date getFechaDeEmision() {
         return fechaDeEmision;
@@ -20,7 +23,6 @@ public class OrdenDePago extends GenericModel {
     private Float totalACancelar;
     private Float totalDeRetenciones;
     private boolean liquidada;
-    private CuentaCorriente cuentaCorriente;
     public List<DocumentoComercial> getFacturas() {
         return facturas;
     }
@@ -63,15 +65,9 @@ public class OrdenDePago extends GenericModel {
     public void setLiquidada(boolean liquidada) {
         this.liquidada = liquidada;
     }
-    public CuentaCorriente getCuentaCorriente() {
-        return cuentaCorriente;
-    }
-    public void setCuentaCorriente(CuentaCorriente cuentaCorriente) {
-        this.cuentaCorriente = cuentaCorriente;
-    }
-    public OrdenDePago(long numeroDeOrden, CuentaCorriente cuentaCorriente, Date fechaDeEmision) {
+
+    public OrdenDePago(long numeroDeOrden, Date fechaDeEmision) {
         this.numeroDeOrden = numeroDeOrden;
-        this.cuentaCorriente = cuentaCorriente;
         this.fechaDeEmision = fechaDeEmision;
     }
 
@@ -81,12 +77,26 @@ public class OrdenDePago extends GenericModel {
     }
 
     public int getCantidadDeFacturas() {
+        if (facturas == null)
+            facturas = new ArrayList<>();
+
         return facturas.size();
     }
     public int getCantidadDeNC() {
+        if (notasDeCredito == null)
+            notasDeCredito = new ArrayList<>();
+
         return notasDeCredito.size();
     }
     public int getCantidadDeND() {
+        if (notasDeDebito == null)
+            notasDeDebito = new ArrayList<>();
+
         return notasDeDebito.size();
+    }
+
+    public void agregarFactura(DocumentoComercial factura) {
+        if (factura.getTipoDeDocumento() == TipoDocumentoComercial.FACTURA)
+            facturas.add(factura);
     }
 }
