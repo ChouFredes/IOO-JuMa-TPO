@@ -80,6 +80,8 @@ public class MenuPrincipal extends JFrame {
                     frame = new FrmOrdenesPagoEmitidas(self, "Ordenes de pago emitidas");
                 } catch (ParseException ex) {
                     throw new RuntimeException(ex);
+                } catch (Exception ex) {
+                    throw new RuntimeException(ex);
                 }
                 frame.setVisible(true);
             }

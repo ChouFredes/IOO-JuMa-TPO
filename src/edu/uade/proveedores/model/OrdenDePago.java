@@ -1,4 +1,5 @@
 package edu.uade.proveedores.model;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 /**
@@ -11,11 +12,6 @@ public class OrdenDePago extends GenericModel {
     private Long numeroDeOrden;
     public Date getFechaDeEmision() {
         return fechaDeEmision;
-    }
-    public OrdenDePago(long numeroDeOrden, CuentaCorriente cuentaCorriente, Date fechaDeEmision) {
-        this.numeroDeOrden = numeroDeOrden;
-        this.cuentaCorriente = cuentaCorriente;
-        this.fechaDeEmision = fechaDeEmision;
     }
     public void setFechaDeEmision(Date fechaDeEmision) {
         this.fechaDeEmision = fechaDeEmision;
@@ -73,12 +69,17 @@ public class OrdenDePago extends GenericModel {
     public void setCuentaCorriente(CuentaCorriente cuentaCorriente) {
         this.cuentaCorriente = cuentaCorriente;
     }
-    public OrdenDePago() {
+    public OrdenDePago(long numeroDeOrden, CuentaCorriente cuentaCorriente, Date fechaDeEmision) {
+        this.numeroDeOrden = numeroDeOrden;
+        this.cuentaCorriente = cuentaCorriente;
+        this.fechaDeEmision = fechaDeEmision;
     }
+
     @Override
     public String toString() {
         return null;
     }
+
     public int getCantidadDeFacturas() {
         return facturas.size();
     }

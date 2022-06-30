@@ -73,6 +73,11 @@ public class CuentaCorrienteTest {
         Proveedor proveedor = (new ProveedorDao()).getById("1c017327-59fa-4cf7-b297-6f2fa170c4ab");
         proveedor.setCuentaCorriente(cc);
         (new ProveedorDao()).save(proveedor);
+        cc.setProveedor(proveedor);
+
+        OrdenDePago ordenDePago = (new OrdenDePagoDao()).getById("cbb77902-08d4-4b55-a457-760548ea8abf");
+        ordenDePago.setCuentaCorriente(cc);
+        (new OrdenDePagoDao()).save(ordenDePago);
 
         /*
         DocumentoComercial dc = (new DocumentoComercialDao()).getById("14f836d1-3d7a-41cb-b126-48513771771a");
