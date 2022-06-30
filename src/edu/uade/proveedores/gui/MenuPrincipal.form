@@ -43,12 +43,12 @@
               <text value="Ordenes de pagos emitidas"/>
             </properties>
           </component>
-          <component id="3e474" class="javax.swing.JButton" binding="btnCCorriente">
+          <component id="3e474" class="javax.swing.JButton" binding="btnABMProductos">
             <constraints>
               <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
-              <text value="Cuenta corriente de proveedores"/>
+              <text value="abm de productos"/>
             </properties>
           </component>
           <component id="41393" class="javax.swing.JButton" binding="btnCompulsa">

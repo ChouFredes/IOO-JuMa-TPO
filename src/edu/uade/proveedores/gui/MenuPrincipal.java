@@ -9,7 +9,7 @@ public class MenuPrincipal extends JFrame {
     private JPanel PnlPrincipal;
     private JButton btnFacturas;
     private JButton btnODPago;
-    private JButton btnCCorriente;
+    private JButton btnABMProductos;
     private JButton btnCompulsa;
     private JButton btnLibroIVA;
     private JButton btnImpuestos;
@@ -43,11 +43,11 @@ public class MenuPrincipal extends JFrame {
                 frame.setVisible(false);
             }
         });
-        btnCCorriente.addActionListener(new ActionListener() {
+        btnABMProductos.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                FrmCCProveedores frame = new FrmCCProveedores(self,"Cuenta Corriente por Proveedor");
-                frame.setVisible(false);
+                FrmABMProductos frame = new FrmABMProductos(self,"ABM de productos");
+                frame.setVisible(true);
             }
         });
         btnLibroIVA.addActionListener(new ActionListener() {
@@ -103,10 +103,10 @@ public class MenuPrincipal extends JFrame {
             }
         });
 
-        btnCCorriente.setVisible(false);
         btnCompulsa.setVisible(false);
         btnLibroIVA.setVisible(false);
         btnImpuestos.setVisible(false);
+        btnODPago.setVisible(false);
     }
 
     public static void main(String[] args) {
