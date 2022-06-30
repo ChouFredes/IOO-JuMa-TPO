@@ -2,6 +2,8 @@ package edu.uade.proveedores.dto;
 
 import edu.uade.proveedores.model.OrdenDePago;
 
+import java.util.Date;
+
 public class OrdenDePagoEmitidaDTO extends GenericDTO {
     public final Long numeroDeOrden;
     public final Long cuitDelProveedor;
@@ -13,12 +15,14 @@ public class OrdenDePagoEmitidaDTO extends GenericDTO {
     public final Float totalACancelar;
     public final Float totalDeRetenciones;
     public final boolean liquidada;
+    public final Date fechaDeEmision;
 
-    public OrdenDePagoEmitidaDTO(Long numeroDeOrden, Long cuitDelProveedor, String razonSocialDelProveedor,
+    public OrdenDePagoEmitidaDTO(Long numeroDeOrden, Date fechaDeEmision, Long cuitDelProveedor, String razonSocialDelProveedor,
                                  int numeroDeCCDelProveedor, int cantidadDeFacturas, int cantidadDenotasDeCredito,
                                  int cantidadDenotasDeDebito, Float totalACancelar, Float totalDeRetenciones,
                                  boolean liquidada) {
         this.numeroDeOrden = numeroDeOrden;
+        this.fechaDeEmision = fechaDeEmision;
         this.cuitDelProveedor = cuitDelProveedor;
         this.razonSocialDelProveedor = razonSocialDelProveedor;
         this.numeroDeCCDelProveedor = numeroDeCCDelProveedor;
@@ -31,7 +35,7 @@ public class OrdenDePagoEmitidaDTO extends GenericDTO {
     }
 
     public static OrdenDePagoEmitidaDTO toDTO(OrdenDePago orden) {
-        return new OrdenDePagoEmitidaDTO(orden.getNumeroDeOrden(), orden.getCuentaCorriente().getProveedor().getCuit(),
+        return new OrdenDePagoEmitidaDTO(orden.getNumeroDeOrden(), orden.getFechaDeEmision(), orden.getCuentaCorriente().getProveedor().getCuit(),
                 orden.getCuentaCorriente().getProveedor().getRazonSocial(),
                 orden.getCuentaCorriente().getNumeroDeCC(), orden.getCantidadDeFacturas(), orden.getCantidadDeNC(),
                 orden.getCantidadDeND(), orden.getTotalACancelar(), orden.getTotalDeRetenciones(), orden.isLiquidada());

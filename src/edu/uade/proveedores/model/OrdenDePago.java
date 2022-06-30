@@ -75,7 +75,6 @@ public class OrdenDePago extends GenericModel {
     }
     public OrdenDePago() {
     }
-
     @Override
     public String toString() {
         return null;

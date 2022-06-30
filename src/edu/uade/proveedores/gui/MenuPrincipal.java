@@ -3,6 +3,7 @@ package edu.uade.proveedores.gui;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.ParseException;
 
 public class MenuPrincipal extends JFrame {
     private JPanel PnlPrincipal;
@@ -74,7 +75,12 @@ public class MenuPrincipal extends JFrame {
         ordenesDePagoEmitidasButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                FrmOrdenesPagoEmit frame = new FrmOrdenesPagoEmit(self, "Ordenes de pago emitidas");
+                FrmOrdenesPagoEmitidas frame = null;
+                try {
+                    frame = new FrmOrdenesPagoEmitidas(self, "Ordenes de pago emitidas");
+                } catch (ParseException ex) {
+                    throw new RuntimeException(ex);
+                }
                 frame.setVisible(true);
             }
         });

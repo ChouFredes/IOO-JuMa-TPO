@@ -24,6 +24,42 @@ public class CuentaCorriente extends GenericModel{
     private List<DocumentoComercial> notasDeDebitoEntregadas = new ArrayList<>();
     private List<DocumentoComercial> notasDeCreditoEntregadas = new ArrayList<>();
 
+    public void setProveedor(Proveedor proveedor) {
+        this.proveedor = proveedor;
+    }
+
+    public List<OrdenDePago> getPagosRealizados() {
+        return pagosRealizados;
+    }
+
+    public void setPagosRealizados(List<OrdenDePago> pagosRealizados) {
+        this.pagosRealizados = pagosRealizados;
+    }
+
+    public List<DocumentoComercial> getFacturasEntregadas() {
+        return facturasEntregadas;
+    }
+
+    public void setFacturasEntregadas(List<DocumentoComercial> facturasEntregadas) {
+        this.facturasEntregadas = facturasEntregadas;
+    }
+
+    public List<DocumentoComercial> getNotasDeDebitoEntregadas() {
+        return notasDeDebitoEntregadas;
+    }
+
+    public void setNotasDeDebitoEntregadas(List<DocumentoComercial> notasDeDebitoEntregadas) {
+        this.notasDeDebitoEntregadas = notasDeDebitoEntregadas;
+    }
+
+    public List<DocumentoComercial> getNotasDeCreditoEntregadas() {
+        return notasDeCreditoEntregadas;
+    }
+
+    public void setNotasDeCreditoEntregadas(List<DocumentoComercial> notasDeCreditoEntregadas) {
+        this.notasDeCreditoEntregadas = notasDeCreditoEntregadas;
+    }
+
     public CuentaCorriente(int numeroDeCC, Proveedor proveedor, float limiteDeDeudaAcordado, boolean esDeudaSobrepasada, float limiteDeCredito,
                            boolean esCreditoSobrepasado, float montoDeCredito, float montoDeDeuda, float montoTotal) {
 
@@ -196,5 +232,9 @@ public class CuentaCorriente extends GenericModel{
                 ", fechaDeCreacion = '" + formatter.format(this.fechaDeCreacion) + '\'' +
                 " }";
 
+    }
+
+    public void agregarOrdeDePago(OrdenDePago ordenDePago) {
+        pagosRealizados.add(ordenDePago);
     }
 }
