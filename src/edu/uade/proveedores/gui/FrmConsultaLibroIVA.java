@@ -1,12 +1,13 @@
-package edu.uade.proveedores.GUI;
+package edu.uade.proveedores.gui;
 
 import javax.swing.*;
 import java.awt.*;
 
-public class FrmCompulsaPrecios extends JDialog {
+public class FrmConsultaLibroIVA extends JDialog{
+
     private JPanel PnlPrincipal;
 
-    public FrmCompulsaPrecios(Window owner, String titulo) {
+    public FrmConsultaLibroIVA(Window owner, String titulo) {
         super(owner, titulo);
         this.setModal(true);
         this.setSize(320, 320);

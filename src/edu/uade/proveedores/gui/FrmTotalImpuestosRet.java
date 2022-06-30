@@ -1,4 +1,4 @@
-package edu.uade.proveedores.GUI;
+package edu.uade.proveedores.gui;
 
 import javax.swing.*;
 import java.awt.*;

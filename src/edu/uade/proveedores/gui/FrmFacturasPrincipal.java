@@ -1,4 +1,4 @@
-package edu.uade.proveedores.GUI;
+package edu.uade.proveedores.gui;
 
 public class FrmFacturasPrincipal {
 }

@@ -1,12 +1,12 @@
-package edu.uade.proveedores.GUI;
+package edu.uade.proveedores.gui;
 
 import javax.swing.*;
 import java.awt.*;
 
-public class FrmTotalDeudaProveedor extends  JDialog{
+public class FrmOrdenesPagoEmit extends JDialog {
     private JPanel PnlPrincipal;
 
-    public FrmTotalDeudaProveedor(Window owner, String titulo) {
+    public FrmOrdenesPagoEmit(Window owner, String titulo) {
         super(owner, titulo);
         this.setModal(true);
         this.setSize(320, 320);
