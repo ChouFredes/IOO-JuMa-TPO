@@ -48,6 +48,7 @@ public class ProveedorTest {
         IAteInString = "03-06-2022";
         inicioDeActividades = formatter.parse(IAteInString);
 
+        /*
         proveedor = new Proveedor(11121314151L, "Augusto",
                 "Augusto", "una direccion", "1112569874",
                 "Augusto@proveedores.com", 1L, inicioDeActividades,
@@ -69,6 +70,8 @@ public class ProveedorTest {
 
         dao.save(proveedor);
         //System.out.println(proveedor.toString());
+
+         */
     }
 
     //@Test
@@ -92,14 +95,20 @@ public class ProveedorTest {
     }
 
     @Test
-    public void obtenerOrdenesDePagoTest() throws Exception {
+    public void obtenerOrdenesDePago2Test() throws Exception {
         SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy", Locale.ENGLISH);
 
-        Proveedor proveedor = (new ProveedorDao()).getById("1aeb593f-1108-4c48-8369-b6576c0da190");
         CuentaCorriente cc = (new CuentaCorrienteDao()).getById("56eefb5f-dcb9-4e4b-aaf0-1b724bac5e49");
+
+        Proveedor proveedor = new Proveedor(11121314151L,"Augusto","Augusto","una direccion","1112569874",
+                "augusto@proveedores.com",1L,formatter.parse("03-06-2022"),
+                TipoRubro.Productos_de_reventa,TipoResponsabilidad.Monotributista, cc);
+
         DocumentoComercial factura = (new DocumentoComercialDao()).getById("14f836d1-3d7a-41cb-b126-48513771771a");
 
-        OrdenDePago op = (new OrdenDePago(2L,formatter.parse("01-01-2022")));
+        OrdenDePago op = new OrdenDePago(2L, formatter.parse("01-01-2022"));
+
+        (new OrdenDePagoDao()).save(op);
 
         factura.setProveedor(proveedor);
 
@@ -107,39 +116,11 @@ public class ProveedorTest {
         op.agregarFactura(factura);
 
         cc.agregarOrdeDePago(op);
-        proveedor.setCuentaCorriente(cc);
 
-        (new OrdenDePagoDao()).save(op);
         (new ProveedorDao()).save(proveedor);
 
-        //OrdenDePago ordenDePago = (new OrdenDePagoDao()).getById("cbb77902-08d4-4b55-a457-760548ea8abf");
-        //cc.agregarOrdeDePago(ordenDePago);
-        //(new CuentaCorrienteDao()).save(cc);
+        System.out.println(proveedor);
 
-        //DocumentoComercial dc = (new DocumentoComercialDao()).getById("14f836d1-3d7a-41cb-b126-48513771771a");
-        //OrdenDePago op = (new OrdenDePago(1L, cc, formatter.parse("01-06-2022")));
-        //ArrayList<DocumentoComercial> facturas = new ArrayList<>();
-        //facturas.add(dc);
-        //op.setFacturas(facturas);
-        //(new OrdenDePagoDao()).save(op);
-
-        //(new CuentaCorrienteDao()).save(cc);
-
-        //Proveedor proveedor = (new ProveedorDao()).getById("1c017327-59fa-4cf7-b297-6f2fa170c4ab");
-        //proveedor.setCuentaCorriente(cc);
-        //(new ProveedorDao()).save(proveedor);
-        //cc.setProveedor(proveedor);
-
-        //(new OrdenDePagoDao()).save(ordenDePago);
-
-        /*
-        DocumentoComercial dc = (new DocumentoComercialDao()).getById("14f836d1-3d7a-41cb-b126-48513771771a");
-        cc.setProveedor(dc.getProveedor());
-        OrdenDePago op = (new OrdenDePagoDao()).getById("cbb77902-08d4-4b55-a457-760548ea8abf");
-        cc.setFacturasEntregadas(op.getFacturas());
-        cc.agregarOrdeDePago(op);
-        */
-        //(new CuentaCorrienteDao()).save(cc);
     }
 
 }

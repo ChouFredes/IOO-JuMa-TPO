@@ -2,40 +2,86 @@ package edu.uade.proveedores.model;
 
 import edu.uade.proveedores.enumeration.*;
 
+import java.util.Date;
+
 /**
  * @author Grupo 5
  */
-public class Producto {
+public class Producto extends GenericModel{
 
-    /**
-     * Default constructor
-     */
-    public Producto() {
-    }
-
-    /**
-     * 
-     */
     private String descripcion;
-
-    /**
-     * 
-     */
     private Float precioPorUnidad;
-
-    /**
-     * 
-     */
     private int detallePorUnidad;
-
-    /**
-     * 
-     */
     private TipoRubro rubro;
-
-    /**
-     * 
-     */
     private TipoIVA IVA;
 
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
+
+    public Float getPrecioPorUnidad() {
+        return precioPorUnidad;
+    }
+
+    public void setPrecioPorUnidad(Float precioPorUnidad) {
+        this.precioPorUnidad = precioPorUnidad;
+    }
+
+    public int getDetallePorUnidad() {
+        return detallePorUnidad;
+    }
+
+    public void setDetallePorUnidad(int detallePorUnidad) {
+        this.detallePorUnidad = detallePorUnidad;
+    }
+
+    public TipoRubro getRubro() {
+        return rubro;
+    }
+
+    public void setRubro(TipoRubro rubro) {
+        this.rubro = rubro;
+    }
+
+    public TipoIVA getIVA() {
+        return IVA;
+    }
+
+    public void setIVA(TipoIVA IVA) {
+        this.IVA = IVA;
+    }
+
+    public Producto(String descripcion, Float precioPorUnidad, int detallePorUnidad, TipoRubro rubro, TipoIVA IVA) {
+        super();
+        this.descripcion = descripcion;
+        this.precioPorUnidad = precioPorUnidad;
+        this.detallePorUnidad = detallePorUnidad;
+        this.rubro = rubro;
+        this.IVA = IVA;
+    }
+
+    public Producto(String id, String descripcion, Float precioPorUnidad, int detallePorUnidad, TipoRubro rubro, TipoIVA IVA, Date fechaDeCreacion) {
+        super(id,fechaDeCreacion);
+        this.descripcion = descripcion;
+        this.precioPorUnidad = precioPorUnidad;
+        this.detallePorUnidad = detallePorUnidad;
+        this.rubro = rubro;
+        this.IVA = IVA;
+    }
+
+    @Override
+    public String toString() {
+        return "Producto {" +
+                " id = '" + this.id + '\'' +
+                ", descripcion = '" + this.descripcion + '\'' +
+                ", precionPorUnidad = '" + this.precioPorUnidad.toString() + '\'' +
+                ", detallePorUnidad = '" + this.detallePorUnidad + '\'' +
+                ", rubro = '" + this.rubro + '\'' +
+                ", IVA = '" + this.IVA + '\'' +
+                " }";
+    }
 }

@@ -1,6 +1,7 @@
 package edu.uade.proveedores.dao;
 
 import edu.uade.proveedores.enumeration.TipoProducto;
+import edu.uade.proveedores.model.Empleado;
 import edu.uade.proveedores.model.Producto;
 
 /**
@@ -8,7 +9,15 @@ import edu.uade.proveedores.model.Producto;
  */
 public class ProductoDao extends GenericDAO<Producto> {
 
-    public ProductoDao(Class<Producto> clase, String file) throws Exception {
-        super(clase, file);
+    public ProductoDao() throws Exception {
+        super(Producto.class, "Producto.json");
+    }
+
+    public void save(Producto producto) throws Exception {
+        if (this.getById(producto.getId()) != null){
+            super.update(producto);
+        } else {
+            super.save(producto);
+        }
     }
 }

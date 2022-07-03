@@ -25,7 +25,7 @@ public class Proveedor extends GenericModel {
 
     public Proveedor(Long cuit, String razonSocial, String nombreDeFantasia, String direccion, String telefono,
                      String correoElectronico, Long numeroIIBB, Date inicioDeActividades, TipoRubro rubro,
-                     TipoResponsabilidad responsabilidadIVA) {
+                     TipoResponsabilidad responsabilidadIVA, CuentaCorriente cuentaCorriente) {
 
         super();
         this.cuit = cuit;
@@ -38,12 +38,13 @@ public class Proveedor extends GenericModel {
         this.inicioDeActividades = inicioDeActividades;
         this.rubro = rubro;
         this.responsabilidadIVA = responsabilidadIVA;
+        this.cuentaCorriente = cuentaCorriente;
 
     }
 
     public Proveedor(String id, Long cuit, String razonSocial, String nombreDeFantasia, String direccion, String telefono,
                      String correoElectronico, Long numeroIIBB, Date inicioDeActividades, TipoRubro rubro,
-                     TipoResponsabilidad responsabilidadIVA, Date fechaDeCreacion) {
+                     TipoResponsabilidad responsabilidadIVA, CuentaCorriente cuentaCorriente, Date fechaDeCreacion) {
 
         super(id,fechaDeCreacion);
         this.cuit = cuit;
@@ -56,6 +57,7 @@ public class Proveedor extends GenericModel {
         this.inicioDeActividades = inicioDeActividades;
         this.rubro = rubro;
         this.responsabilidadIVA = responsabilidadIVA;
+        this.cuentaCorriente = cuentaCorriente;
 
     }
 
@@ -153,6 +155,7 @@ public class Proveedor extends GenericModel {
                 ", inicioDeActividades = '" + formatter.format(this.inicioDeActividades) + '\'' +
                 ", rubro = '" + this.rubro + '\'' +
                 ", responsabilidadIVA = '" + this.responsabilidadIVA + '\'' +
+                //", cuentaCorriente = '" + this.cuentaCorriente.toString() + '\'' +
                 ", fechaDeCreacion = '" + formatter.format(this.fechaDeCreacion) + '\'' +
                 " }";
     }

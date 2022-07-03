@@ -25,8 +25,6 @@ public class CuentaCorriente extends GenericModel{
     private List<DocumentoComercial> notasDeDebitoEntregadas = new ArrayList<>();
     private List<DocumentoComercial> notasDeCreditoEntregadas = new ArrayList<>();
 
-    //public void setProveedor(Proveedor proveedor) {this.proveedor = proveedor;}
-
     public List<OrdenDePago> getPagosRealizados() {
         return pagosRealizados;
     }
@@ -64,7 +62,6 @@ public class CuentaCorriente extends GenericModel{
 
         super();
         this.numeroDeCC = numeroDeCC;
-        //this.proveedor = proveedor;
         this.limiteDeDeudaAcordado = limiteDeDeudaAcordado;
         this.esDeudaSobrepasada = esDeudaSobrepasada;
         this.limiteDeCredito = limiteDeCredito;
@@ -81,7 +78,6 @@ public class CuentaCorriente extends GenericModel{
 
         super(id,fechaDeCreacion);
         this.numeroDeCC = numeroDeCC;
-        //this.proveedor = proveedor;
         this.limiteDeDeudaAcordado = limiteDeDeudaAcordado;
         this.esDeudaSobrepasada = esDeudaSobrepasada;
         this.limiteDeCredito = limiteDeCredito;

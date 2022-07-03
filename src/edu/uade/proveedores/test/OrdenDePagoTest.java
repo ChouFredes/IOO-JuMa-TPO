@@ -26,7 +26,7 @@ public class OrdenDePagoTest {
         //(new OrdenDePagoDao()).save(op);
     }
 
-    @Test
+    //@Test
     public void obtenerOrdenDePagoTest() throws Exception {
         OrdenDePago ordenDePago = (new OrdenDePagoDao()).getById("cbb77902-08d4-4b55-a457-760548ea8abf");
         (new OrdenDePagoDao()).save(ordenDePago);

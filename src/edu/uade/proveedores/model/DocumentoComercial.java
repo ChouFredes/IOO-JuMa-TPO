@@ -32,6 +32,7 @@ public class DocumentoComercial extends GenericModel{
         this.precioTotal = precioTotal;
         this.impuestoTotal = impuestoTotal;
         this.creador = creador;
+        this.proveedor = proveedor;
 
     }
 
@@ -46,6 +47,7 @@ public class DocumentoComercial extends GenericModel{
             this.precioTotal = precioTotal;
             this.impuestoTotal = impuestoTotal;
             this.creador = creador;
+            this.proveedor = proveedor;
 
     }
 

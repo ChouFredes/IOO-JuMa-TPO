@@ -26,7 +26,7 @@ public class CuentaCorrienteTest {
         dao = new CuentaCorrienteDao();
     }
 
-    @Test
+    //@Test
     void loadAndSaveDao() throws Exception{
 
         //String id = "b85ab4c6-64db-4e30-bc37-6cc1e77a20e2";
@@ -66,7 +66,7 @@ public class CuentaCorrienteTest {
         System.out.println(cuentaCorriente);
     }
 
-    @Test
+    //@Test
     public void crearCuentaCorrienteTest() throws Exception {
         SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy", Locale.ENGLISH);
         CuentaCorriente cc = (new CuentaCorrienteDao()).getById("c7bcc677-106c-4542-a2b6-a37d4fb1dd7f");

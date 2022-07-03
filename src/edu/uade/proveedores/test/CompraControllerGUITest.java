@@ -33,10 +33,13 @@ public class CompraControllerGUITest {
         new EmpleadoDao().save(new Empleado("2758d315-8779-4e62-ba6a-a8b80b69793b",1,"Gonzalo","Navarte", 35999991, formatter.parse("24-10-2012")));
         new EmpleadoDao().save(new Empleado("8b8ae4a1-9d45-4c1a-9897-316200e2b54e",1,"Alejandro","Fredes", 35999992, formatter.parse("15-02-2016")));
 
+        /*
         new ProveedorDao().save(new Proveedor("b85ab4c6-64db-4e30-bc37-6cc1e77a20e2", 99999998888L, "razon social",
                 "nombre de fantasia", "una direccion", "1112569874",
                 "uncorreo@proveedores.com", 1L, formatter.parse("01-01-2022"),
                 TipoRubro.Productos_de_reventa, TipoResponsabilidad.Monotributista, formatter.parse("01-05-2022")));
+
+         */
     }
 
     //@AfterAll

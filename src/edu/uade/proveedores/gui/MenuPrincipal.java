@@ -46,7 +46,12 @@ public class MenuPrincipal extends JFrame {
         btnABMProductos.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                FrmABMProductos frame = new FrmABMProductos(self,"ABM de productos");
+                FrmABMProductos frame = null;
+                try {
+                    frame = new FrmABMProductos(self,"ABM de productos");
+                } catch (Exception ex) {
+                    throw new RuntimeException(ex);
+                }
                 frame.setVisible(true);
             }
         });

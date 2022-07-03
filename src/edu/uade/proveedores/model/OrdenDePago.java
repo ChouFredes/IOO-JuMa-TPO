@@ -69,6 +69,8 @@ public class OrdenDePago extends GenericModel {
     public OrdenDePago(long numeroDeOrden, Date fechaDeEmision) {
         this.numeroDeOrden = numeroDeOrden;
         this.fechaDeEmision = fechaDeEmision;
+        this.totalACancelar = 0f;
+        this.totalDeRetenciones = 0f;
     }
 
     @Override

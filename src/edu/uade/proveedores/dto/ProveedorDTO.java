@@ -2,6 +2,7 @@ package edu.uade.proveedores.dto;
 
 import edu.uade.proveedores.enumeration.TipoResponsabilidad;
 import edu.uade.proveedores.enumeration.TipoRubro;
+import edu.uade.proveedores.model.CuentaCorriente;
 import edu.uade.proveedores.model.DocumentoComercial;
 import edu.uade.proveedores.model.Proveedor;
 
@@ -54,11 +55,11 @@ public class ProveedorDTO extends GenericDTO{
         if (this.id != null) {
             model = new Proveedor(this.id, this.cuit, this.razonSocial, this.nombreDeFantasia, this.direccion,
                     this.telefono, this.correoElectronico, this.numeroIIBB, this.inicioDeActividades, this.rubro,
-                    this.responsabilidadIVA, this.fechaDeCreacion);
+                    this.responsabilidadIVA, null, this.fechaDeCreacion);
         } else {
             model = new Proveedor(this.cuit, this.razonSocial, this.nombreDeFantasia, this.direccion,
                     this.telefono, this.correoElectronico, this.numeroIIBB, this.inicioDeActividades, this.rubro,
-                    this.responsabilidadIVA);
+                    this.responsabilidadIVA, null);
         }
 
         return model;
