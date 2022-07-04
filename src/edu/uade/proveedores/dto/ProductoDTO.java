@@ -1,6 +1,7 @@
 package edu.uade.proveedores.dto;
 
 import edu.uade.proveedores.enumeration.TipoIVA;
+import edu.uade.proveedores.enumeration.TipoImpuestoProducto;
 import edu.uade.proveedores.enumeration.TipoRubro;
 import edu.uade.proveedores.model.Producto;
 import edu.uade.proveedores.model.Proveedor;
@@ -19,10 +20,10 @@ public class ProductoDTO extends GenericDTO{
     public final Float precioPorUnidad;
     public final int detallePorUnidad;
     public final TipoRubro rubro;
-    public final TipoIVA IVA;
+    public final TipoImpuestoProducto IVA;
 
     public ProductoDTO(String id, Long cuitDelProveedor, String razonSocial, String descripcion,
-                       Float precioPorUnidad, int detallePorUnidad, TipoRubro rubro, TipoIVA iva, Date fechaDeCreacion) {
+                       Float precioPorUnidad, int detallePorUnidad, TipoRubro rubro, TipoImpuestoProducto iva, Date fechaDeCreacion) {
         this.id = id;
         this.cuitDelProveedor = cuitDelProveedor;
         this.razonSocial = razonSocial;

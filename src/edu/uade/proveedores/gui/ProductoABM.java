@@ -13,21 +13,18 @@ import java.awt.event.ActionListener;
 public class ProductoABM extends JDialog {
 
     private final JPanel contentPanel = new JPanel();
-    private JTextField txtDNI;
-    private JTextField txtApellido;
-    private JTextField txtNombre;
-    private JFormattedTextField txtFNacimiento;
-    private JFormattedTextField txtSueldo;
+
+    private JTextField txtId;
+    private JFormattedTextField txtFechaDeCreacion;
+    private JTextField txtCuitDelProveedor;
+    private JTextField txtRazonSocial;
+    private JTextField txtDescripcion;
+    private JTextField txtDetallePorUnidad;
+    private JFormattedTextField txtPrecioPorUnidad;
+    private JTextField txtRubro;
+    private JTextField txtIVA;
     private ProductoDTO productoDTO;
     private ModalResult modalResult;
-
-    /**
-     * Launch the application.
-     */
-
-    /**
-     * Create the dialog.
-     */
 
     private void inicializarControles() {
         setBounds(100, 100, 450, 245);
@@ -35,50 +32,70 @@ public class ProductoABM extends JDialog {
         contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
         getContentPane().add(contentPanel, BorderLayout.CENTER);
 
-        JLabel lblNewLabel = new JLabel("DNI");
+        JLabel lblId = new JLabel("Id");
+        txtId = new JTextField();
+        txtId.setColumns(10);
 
-        txtDNI = new JTextField();
-        txtDNI.setColumns(10);
+        JLabel lblFechaDeCreacion = new JLabel("Fecha de creacion");
+        txtFechaDeCreacion = new JFormattedTextField();
 
-        JLabel lblNewLabel_1 = new JLabel("Apellido");
+        JLabel lblCuitDelProveedor = new JLabel("Cuit");
+        txtCuitDelProveedor = new JTextField();
+        txtCuitDelProveedor.setColumns(10);
 
-        txtApellido = new JTextField();
-        txtApellido.setColumns(10);
+        JLabel lblRazonSocial = new JLabel("Razon Social");
+        txtRazonSocial = new JTextField();
+        txtRazonSocial.setColumns(10);
 
-        JLabel lblNombre = new JLabel("Nombre");
+        JLabel lblDescripcion = new JLabel("Descripcion");
+        txtDescripcion = new JTextField();
+        txtDescripcion.setColumns(10);
 
-        txtNombre = new JTextField();
-        txtNombre.setColumns(10);
+        JLabel lblPrecioPorUnidad = new JLabel("Precio Por Unidad");
+        txtPrecioPorUnidad = new JFormattedTextField();
 
-        JCheckBox chcSindicalizado = new JCheckBox("Sindicalizado");
+        JLabel lblDetallePorUnidad = new JLabel("Detalle por unidad");
+        txtDetallePorUnidad = new JTextField();
+        txtDetallePorUnidad.setColumns(10);
 
-        JLabel lblNewLabel_2 = new JLabel("Nacimiento");
+        JLabel lblRubro = new JLabel("Rubro");
+        txtRubro = new JTextField();
+        txtRubro.setColumns(10);
 
-        txtFNacimiento = new JFormattedTextField();
+        JLabel lblIVA = new JLabel("IVA");
+        txtIVA = new JTextField();
+        txtIVA.setColumns(10);
 
-        JLabel lblNewLabel_3 = new JLabel("Sueldo");
+        JCheckBox aaaachcSindicalizado = new JCheckBox("Sindicalizado");
 
-        txtSueldo = new JFormattedTextField();
+
         GroupLayout gl_contentPanel = new GroupLayout(contentPanel);
         gl_contentPanel.setHorizontalGroup(
                 gl_contentPanel.createParallelGroup(GroupLayout.Alignment.LEADING)
                         .addGroup(gl_contentPanel.createSequentialGroup()
                                 .addContainerGap()
                                 .addGroup(gl_contentPanel.createParallelGroup(GroupLayout.Alignment.LEADING)
-                                        .addComponent(lblNewLabel_1)
-                                        .addComponent(lblNewLabel)
-                                        .addComponent(lblNombre, GroupLayout.PREFERRED_SIZE, 37, GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(lblNewLabel_2)
-                                        .addComponent(lblNewLabel_3))
+                                        .addComponent(lblId)
+                                        .addComponent(lblFechaDeCreacion)
+                                        .addComponent(lblCuitDelProveedor)
+                                        .addComponent(lblRazonSocial)
+                                        .addComponent(lblDescripcion)
+                                        .addComponent(lblPrecioPorUnidad)
+                                        .addComponent(lblDetallePorUnidad)
+                                        .addComponent(lblRubro, GroupLayout.PREFERRED_SIZE, 37, GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(lblIVA))
                                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(gl_contentPanel.createParallelGroup(GroupLayout.Alignment.LEADING)
-                                        .addComponent(chcSindicalizado)
-                                        .addComponent(txtDNI, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(txtApellido, GroupLayout.PREFERRED_SIZE, 250, GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(txtNombre, GroupLayout.PREFERRED_SIZE, 250, GroupLayout.PREFERRED_SIZE)
-                                        .addGroup(gl_contentPanel.createParallelGroup(GroupLayout.Alignment.TRAILING, false)
-                                                .addComponent(txtSueldo, GroupLayout.Alignment.LEADING)
-                                                .addComponent(txtFNacimiento, GroupLayout.Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 91, Short.MAX_VALUE)))
+                                        .addComponent(txtId, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(txtFechaDeCreacion, GroupLayout.Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 91, Short.MAX_VALUE)
+                                        .addComponent(txtCuitDelProveedor, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(txtRazonSocial, GroupLayout.PREFERRED_SIZE, 250, GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(txtDescripcion, GroupLayout.PREFERRED_SIZE, 250, GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(txtPrecioPorUnidad, GroupLayout.Alignment.LEADING)
+                                        .addComponent(txtDetallePorUnidad, GroupLayout.PREFERRED_SIZE, 250, GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(txtRubro, GroupLayout.PREFERRED_SIZE, 250, GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(txtIVA, GroupLayout.PREFERRED_SIZE, 250, GroupLayout.PREFERRED_SIZE)
+                                )
                                 .addContainerGap(108, Short.MAX_VALUE))
         );
         gl_contentPanel.setVerticalGroup(
@@ -86,26 +103,37 @@ public class ProductoABM extends JDialog {
                         .addGroup(gl_contentPanel.createSequentialGroup()
                                 .addContainerGap()
                                 .addGroup(gl_contentPanel.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                                        .addComponent(lblNewLabel)
-                                        .addComponent(txtDNI, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(lblId)
+                                        .addComponent(txtId, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
                                 .addGap(4)
                                 .addGroup(gl_contentPanel.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                                        .addComponent(lblNewLabel_1)
-                                        .addComponent(txtApellido, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(lblFechaDeCreacion)
+                                        .addComponent(txtFechaDeCreacion, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(gl_contentPanel.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                                        .addComponent(lblNombre)
-                                        .addComponent(txtNombre, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(lblCuitDelProveedor)
+                                        .addComponent(txtCuitDelProveedor, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(gl_contentPanel.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                                        .addComponent(lblNewLabel_2)
-                                        .addComponent(txtFNacimiento, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(lblDescripcion)
+                                        .addComponent(txtDescripcion, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(gl_contentPanel.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                                        .addComponent(lblNewLabel_3)
-                                        .addComponent(txtSueldo, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(lblPrecioPorUnidad)
+                                        .addComponent(txtPrecioPorUnidad, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(chcSindicalizado)
+                                .addGroup(gl_contentPanel.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                                        .addComponent(lblDetallePorUnidad)
+                                        .addComponent(txtDetallePorUnidad, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(gl_contentPanel.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                                        .addComponent(lblRubro)
+                                        .addComponent(txtRubro, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(gl_contentPanel.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                                        .addComponent(lblIVA)
+                                        .addComponent(txtIVA, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                                 .addContainerGap(60, Short.MAX_VALUE))
         );
         contentPanel.setLayout(gl_contentPanel);
@@ -144,8 +172,8 @@ public class ProductoABM extends JDialog {
     private void asignarFormato() {
         try {
             try {
-                txtFNacimiento.setFormatterFactory(new DefaultFormatterFactory(new MaskFormatter("##/##/####")));
-                txtSueldo.setFormatterFactory(new DefaultFormatterFactory(new MaskFormatter("#####.##")));
+                txtFechaDeCreacion.setFormatterFactory(new DefaultFormatterFactory(new MaskFormatter("##/##/####")));
+                txtPrecioPorUnidad.setFormatterFactory(new DefaultFormatterFactory(new MaskFormatter("#####.##")));
             } catch (Exception e) {
                 // TODO Auto-generated catch block
                 e.printStackTrace();

@@ -81,15 +81,35 @@ public class ProveedorController {
     }
 
     public ArrayList<ProductoDTO> obtenerProductos() {
-        for (Producto producto: productos) {
+        ArrayList<ProductoDTO> productosDTO = new ArrayList<>();
 
+        for (Proveedor proveedor: proveedores) {
+            for (Producto producto: proveedor.getProductos()) {
+                productosDTO.add(ProductoDTO.toDTO(proveedor,producto));
+            }
         }
-        return new ArrayList<>();
+        return productosDTO;
     }
 
-    public void agregarProductoDeProveedor(ProductoDTO productoDTO) {
+    public void agregarProductoDeProveedor(ProductoDTO productoDTO) throws Exception {
+        Producto producto = productoDTO.toModel();
+        ProductoDao productoDao = (new ProductoDao());
+        productoDao.save(producto);
+        this.actualizarProductos(productoDTO.cuitDelProveedor);
     }
 
-    public void eliminarProductoDeProveedor(ProductoDTO remove) {
+    public void eliminarProductoDeProveedor(ProductoDTO productoDTO) throws Exception {
+        Producto producto = productoDTO.toModel();
+        ProductoDao productoDao = (new ProductoDao());
+        productoDao.delete(productoDTO.id);
+        this.actualizarProductos(productoDTO.cuitDelProveedor);
+    }
+
+    private void actualizarProductos(Long cuit) throws Exception {
+        for (Proveedor proveedor:proveedores){
+            if (proveedor.getCuit().equals(cuit)) {
+                proveedor.setProductos((new ProductoDao()).getAll());
+            }
+        }
     }
 }

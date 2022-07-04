@@ -3,7 +3,9 @@ package edu.uade.proveedores.model;
 import edu.uade.proveedores.enumeration.*;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  * @author Grupo 5
@@ -22,6 +24,7 @@ public class Proveedor extends GenericModel {
     private TipoResponsabilidad responsabilidadIVA;
     private CuentaCorriente cuentaCorriente;
 
+    private List<Producto> productos;
 
     public Proveedor(Long cuit, String razonSocial, String nombreDeFantasia, String direccion, String telefono,
                      String correoElectronico, Long numeroIIBB, Date inicioDeActividades, TipoRubro rubro,
@@ -39,6 +42,7 @@ public class Proveedor extends GenericModel {
         this.rubro = rubro;
         this.responsabilidadIVA = responsabilidadIVA;
         this.cuentaCorriente = cuentaCorriente;
+        this.productos = new ArrayList<>();
 
     }
 
@@ -58,6 +62,7 @@ public class Proveedor extends GenericModel {
         this.rubro = rubro;
         this.responsabilidadIVA = responsabilidadIVA;
         this.cuentaCorriente = cuentaCorriente;
+        this.productos = new ArrayList<>();
 
     }
 
@@ -137,6 +142,16 @@ public class Proveedor extends GenericModel {
 
     public void setCuentaCorriente(CuentaCorriente cuentaCorriente) {
         this.cuentaCorriente = cuentaCorriente;
+    }
+
+    public List<Producto> getProductos() {
+        if (productos ==  null)
+            productos = new ArrayList<>();
+        return productos;
+    }
+
+    public void setProductos(List<Producto> productos) {
+        this.productos = productos;
     }
 
     @Override

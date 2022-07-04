@@ -13,7 +13,7 @@ public class Producto extends GenericModel{
     private Float precioPorUnidad;
     private int detallePorUnidad;
     private TipoRubro rubro;
-    private TipoIVA IVA;
+    private TipoImpuestoProducto IVA;
 
     public String getDescripcion() {
         return descripcion;
@@ -47,15 +47,15 @@ public class Producto extends GenericModel{
         this.rubro = rubro;
     }
 
-    public TipoIVA getIVA() {
+    public TipoImpuestoProducto getIVA() {
         return IVA;
     }
 
-    public void setIVA(TipoIVA IVA) {
+    public void setIVA(TipoImpuestoProducto IVA) {
         this.IVA = IVA;
     }
 
-    public Producto(String descripcion, Float precioPorUnidad, int detallePorUnidad, TipoRubro rubro, TipoIVA IVA) {
+    public Producto(String descripcion, Float precioPorUnidad, int detallePorUnidad, TipoRubro rubro, TipoImpuestoProducto IVA) {
         super();
         this.descripcion = descripcion;
         this.precioPorUnidad = precioPorUnidad;
@@ -64,7 +64,7 @@ public class Producto extends GenericModel{
         this.IVA = IVA;
     }
 
-    public Producto(String id, String descripcion, Float precioPorUnidad, int detallePorUnidad, TipoRubro rubro, TipoIVA IVA, Date fechaDeCreacion) {
+    public Producto(String id, String descripcion, Float precioPorUnidad, int detallePorUnidad, TipoRubro rubro, TipoImpuestoProducto IVA, Date fechaDeCreacion) {
         super(id,fechaDeCreacion);
         this.descripcion = descripcion;
         this.precioPorUnidad = precioPorUnidad;

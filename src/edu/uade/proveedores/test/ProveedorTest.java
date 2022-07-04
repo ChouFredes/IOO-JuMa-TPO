@@ -94,7 +94,7 @@ public class ProveedorTest {
 
     }
 
-    @Test
+    //@Test
     public void obtenerOrdenesDePago2Test() throws Exception {
         SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy", Locale.ENGLISH);
 

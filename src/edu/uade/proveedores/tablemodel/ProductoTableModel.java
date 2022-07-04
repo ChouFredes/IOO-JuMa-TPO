@@ -5,6 +5,7 @@ import edu.uade.proveedores.dto.ProductoDTO;
 
 import javax.swing.table.AbstractTableModel;
 import java.util.ArrayList;
+import java.util.Date;
 
 ;
 
@@ -19,7 +20,8 @@ public class ProductoTableModel extends AbstractTableModel{
 	
 	protected String[] columnNames = new String[] { "id", "cuit", "razonSocial", "descripcion", "precioPorUnidad",
 			"detallePorUnidad", "rubro", "IVA", "fechaDeCreacion"};
-	protected Class[] columnClasses = new Class[] { String.class, String.class, String.class, boolean.class, String.class, float.class}; 
+	protected Class[] columnClasses = new Class[] { String.class, Long.class, String.class, String.class, Float.class,
+			int.class, String.class, String.class, Date.class};
 
 
 	public String getColumnName(int col) { return columnNames[col]; } 
@@ -69,8 +71,7 @@ public class ProductoTableModel extends AbstractTableModel{
 		}
 	}
 	
-	public void agregar(ProductoDTO productoDTO)
-	{
+	public void agregar(ProductoDTO productoDTO) throws Exception {
 		proveedorController.agregarProductoDeProveedor(productoDTO);
 		actualizarProductos();
 		fireTableDataChanged();
@@ -80,15 +81,13 @@ public class ProductoTableModel extends AbstractTableModel{
 		fireTableDataChanged();
 	}
 	
-	public void eliminar(int fila)
-	{
+	public void eliminar(int fila) throws Exception {
 		proveedorController.eliminarProductoDeProveedor(productos.get(fila));
 		actualizarProductos();
 		fireTableDataChanged();
 	}
 	
-	public void eliminar(ProductoDTO productoDTO)
-	{
+	public void eliminar(ProductoDTO productoDTO) throws Exception {
 		eliminar(productos.indexOf(productoDTO));
 	}
 
