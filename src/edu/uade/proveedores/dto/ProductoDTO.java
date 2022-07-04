@@ -22,6 +22,7 @@ public class ProductoDTO extends GenericDTO{
     public final TipoRubro rubro;
     public final TipoImpuestoProducto IVA;
 
+
     public ProductoDTO(String id, Long cuitDelProveedor, String razonSocial, String descripcion,
                        Float precioPorUnidad, int detallePorUnidad, TipoRubro rubro, TipoImpuestoProducto iva, Date fechaDeCreacion) {
         this.id = id;

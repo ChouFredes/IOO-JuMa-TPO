@@ -94,14 +94,38 @@ public class ProveedorController {
     public void agregarProductoDeProveedor(ProductoDTO productoDTO) throws Exception {
         Producto producto = productoDTO.toModel();
         ProductoDao productoDao = (new ProductoDao());
-        productoDao.save(producto);
+
+        for (Proveedor proveedor : proveedores) {
+            if (proveedor.getCuit().equals(productoDTO.cuitDelProveedor)) {
+                proveedor.getProductos().add(producto);
+                (new ProveedorDao()).save(proveedor);
+                productoDao.save(producto);
+            }
+        }
+
         this.actualizarProductos(productoDTO.cuitDelProveedor);
     }
 
     public void eliminarProductoDeProveedor(ProductoDTO productoDTO) throws Exception {
-        Producto producto = productoDTO.toModel();
+        int indiceDeProducto = -1;
+        Proveedor proveedor = null;
         ProductoDao productoDao = (new ProductoDao());
-        productoDao.delete(productoDTO.id);
+        for (Proveedor prov:proveedores) {
+            if (prov.getCuit().equals(productoDTO.cuitDelProveedor)) {
+                for (Producto pr:prov.getProductos()){
+                    if (pr.getId().equals(productoDTO.id)) {
+                        indiceDeProducto = prov.getProductos().lastIndexOf(pr);
+                        proveedor = prov;
+                    }
+                }
+            }
+        }
+        if (indiceDeProducto > -1 && proveedor != null) {
+            proveedor.getProductos().remove(indiceDeProducto);
+            (new ProveedorDao()).save(proveedor);
+            productoDao.delete(productoDTO.id);
+        }
+
         this.actualizarProductos(productoDTO.cuitDelProveedor);
     }
 
