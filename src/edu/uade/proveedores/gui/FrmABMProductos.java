@@ -1,12 +1,6 @@
 package edu.uade.proveedores.gui;
 
-import edu.uade.proveedores.dao.ProductoDao;
-import edu.uade.proveedores.dao.ProveedorDao;
 import edu.uade.proveedores.dto.ProductoDTO;
-import edu.uade.proveedores.enumeration.TipoImpuestoProducto;
-import edu.uade.proveedores.enumeration.TipoRubro;
-import edu.uade.proveedores.model.Producto;
-import edu.uade.proveedores.model.Proveedor;
 import edu.uade.proveedores.tablemodel.ProductoTableModel;
 
 import javax.swing.*;
@@ -19,9 +13,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.io.FileNotFoundException;
 import java.util.ArrayList;
-import java.util.List;
 
 public class FrmABMProductos extends JDialog {
 
@@ -35,14 +27,6 @@ public class FrmABMProductos extends JDialog {
 
     public FrmABMProductos(Window owner, String titulo) throws Exception {
         super(owner, titulo);
-        /*
-        this.setModal(true);
-        this.setSize(320, 320);
-        this.setContentPane(PnlPrincipal);
-        this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        this.setLocationRelativeTo(null);
-        */
-
         tableModel = new ProductoTableModel();
         initialize();
 
@@ -50,18 +34,12 @@ public class FrmABMProductos extends JDialog {
 
     private void agregarProducto() {
         try {
-            /*
             ProductoABM dialog = new ProductoABM(frame);
             dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
             dialog.setVisible(true);
-            JOptionPane.showMessageDialog(null, "termineeee");
+            //JOptionPane.showMessageDialog(null, "termineeee");
             if (dialog.getModalResult() == ModalResult.OK)
                 tableModel.agregar(dialog.getProductoDTO());
-             */
-
-            tableModel.agregar(new ProductoDTO(null,12345678910L,"Gonzalo","UnProducto",
-                    1000.50f,1, TipoRubro.Productos_de_reventa,
-                    TipoImpuestoProducto.IVA_10_5,null));
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -70,12 +48,15 @@ public class FrmABMProductos extends JDialog {
 
     private void modificarProducto() {
         try {
-            ProductoABM dialog = new ProductoABM(frame);
-            dialog.setProductoDTO(tableModel.obtenerProducto(tableProductos.getSelectedRow()));
-            dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-            dialog.setVisible(true);
-            if (dialog.getModalResult() == ModalResult.OK)
-                tableModel.refresh();
+            if (tableProductos.getSelectedRow() > -1) {
+                ProductoABM dialog = new ProductoABM(frame);
+                dialog.setProductoDTO(tableModel.obtenerProducto(tableProductos.getSelectedRow()));
+                dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+                dialog.setVisible(true);
+                if (dialog.getModalResult() == ModalResult.OK)
+                    tableModel.agregar(dialog.getProductoDTO());
+                    //tableModel.refresh();
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -83,7 +64,9 @@ public class FrmABMProductos extends JDialog {
 
     private void eliminarProducto() {
         try {
-            tableModel.eliminar(tableProductos.getSelectedRow());
+            if (tableProductos.getSelectedRow() > -1) {
+                tableModel.eliminar(tableProductos.getSelectedRow());
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -195,7 +178,7 @@ public class FrmABMProductos extends JDialog {
         tableProductos.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
         scrollPane.setViewportView(tableProductos);
         frame.setVisible(true);
-        PnlPrincipal.setVisible(true);
+        //PnlPrincipal.setVisible(true);
     }
 }
 

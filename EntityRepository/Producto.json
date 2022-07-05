@@ -1,1 +1,2 @@
-{"descripcion":"UnProducto","precioPorUnidad":1000.5,"detallePorUnidad":1,"rubro":"Productos_de_reventa","IVA":"IVA_10_5","id":"289efe9f-7271-4a2b-a7ed-5dd8be1a63d6","fechaDeCreacion":"Jul 4, 2022, 2:29:54 AM"}
+{"descripcion":"productoSarasa","precioPorUnidad":10000.0,"detallePorUnidad":100,"rubro":"Productos_de_reventa","IVA":"IVA_2_5","id":"ac820d7a-265c-41b3-b49b-8ed96b5f29d2","fechaDeCreacion":"Jul 4, 2022, 10:29:05 PM"}
+{"descripcion":"ningunSarasa","precioPorUnidad":150000.98,"detallePorUnidad":1000,"rubro":"Productos_de_reventa","IVA":"IVA_2_5","id":"14000ed2-8988-4182-900d-9035e5db3f7c","fechaDeCreacion":"Jul 4, 2022, 10:32:19 PM"}

@@ -91,13 +91,23 @@ public class ProveedorController {
         return productosDTO;
     }
 
-    public void agregarProductoDeProveedor(ProductoDTO productoDTO) throws Exception {
+    public void actualizarProductoDeProveedor(ProductoDTO productoDTO) throws Exception {
         Producto producto = productoDTO.toModel();
         ProductoDao productoDao = (new ProductoDao());
+        int indice = -1;
 
         for (Proveedor proveedor : proveedores) {
             if (proveedor.getCuit().equals(productoDTO.cuitDelProveedor)) {
-                proveedor.getProductos().add(producto);
+                for (Producto prod: proveedor.getProductos()) {
+                    if (prod.getId().equals(productoDTO.id)){
+                        indice = proveedor.getProductos().indexOf(prod);
+                    }
+                }
+                if (indice > -1) {
+                    proveedor.getProductos().set(indice,producto);
+                } else {
+                    proveedor.getProductos().add(producto);
+                }
                 (new ProveedorDao()).save(proveedor);
                 productoDao.save(producto);
             }
@@ -114,7 +124,7 @@ public class ProveedorController {
             if (prov.getCuit().equals(productoDTO.cuitDelProveedor)) {
                 for (Producto pr:prov.getProductos()){
                     if (pr.getId().equals(productoDTO.id)) {
-                        indiceDeProducto = prov.getProductos().lastIndexOf(pr);
+                        indiceDeProducto = prov.getProductos().indexOf(pr);
                         proveedor = prov;
                     }
                 }

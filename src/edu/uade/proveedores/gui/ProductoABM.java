@@ -1,6 +1,8 @@
 package edu.uade.proveedores.gui;
 
 import edu.uade.proveedores.dto.ProductoDTO;
+import edu.uade.proveedores.enumeration.TipoImpuestoProducto;
+import edu.uade.proveedores.enumeration.TipoRubro;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -9,6 +11,11 @@ import javax.swing.text.MaskFormatter;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Locale;
+
+import static java.lang.Long.parseLong;
 
 public class ProductoABM extends JDialog {
 
@@ -27,7 +34,7 @@ public class ProductoABM extends JDialog {
     private ModalResult modalResult;
 
     private void inicializarControles() {
-        setBounds(100, 100, 450, 245);
+        setBounds(300, 300, 450, 450);
         getContentPane().setLayout(new BorderLayout());
         contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
         getContentPane().add(contentPanel, BorderLayout.CENTER);
@@ -115,6 +122,10 @@ public class ProductoABM extends JDialog {
                                         .addComponent(txtCuitDelProveedor, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(gl_contentPanel.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                                        .addComponent(lblRazonSocial)
+                                        .addComponent(txtRazonSocial, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(gl_contentPanel.createParallelGroup(GroupLayout.Alignment.BASELINE)
                                         .addComponent(lblDescripcion)
                                         .addComponent(txtDescripcion, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
@@ -145,7 +156,11 @@ public class ProductoABM extends JDialog {
                 JButton okButton = new JButton("OK");
                 okButton.addActionListener(new ActionListener() {
                     public void actionPerformed(ActionEvent arg0) {
-                        asignarDatosEntidad();
+                        try {
+                            asignarDatosEntidad();
+                        } catch (ParseException e) {
+                            throw new RuntimeException(e);
+                        }
                         modalResult = ModalResult.OK;
                         dispose();
                     }
@@ -172,8 +187,8 @@ public class ProductoABM extends JDialog {
     private void asignarFormato() {
         try {
             try {
-                txtFechaDeCreacion.setFormatterFactory(new DefaultFormatterFactory(new MaskFormatter("##/##/####")));
-                txtPrecioPorUnidad.setFormatterFactory(new DefaultFormatterFactory(new MaskFormatter("#####.##")));
+                //txtFechaDeCreacion.setFormatterFactory(new DefaultFormatterFactory(new MaskFormatter("##/##/####")));
+                //txtPrecioPorUnidad.setFormatterFactory(new DefaultFormatterFactory(new MaskFormatter("##########.##")));
             } catch (Exception e) {
                 // TODO Auto-generated catch block
                 e.printStackTrace();
@@ -185,40 +200,58 @@ public class ProductoABM extends JDialog {
     }
 
     public ProductoABM(JFrame frame) {
-        super(frame, "Persona", true);
+        super(frame, "Producto", true);
         setLocationRelativeTo(frame);
         inicializarControles();
         asignarFormato();
     }
 
-    public ProductoDTO getProductoDTO() {
-        return productoDTO;
-    }
+    private void asignarDatosEntidad() throws ParseException {
+        SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy", Locale.ENGLISH);
 
-    private void asignarDatosEntidad() {
-        /*
-        productoDTO.setDni(txtDNI.getText());
-        productoDTO.setApellido(txtApellido.getText());
-        productoDTO.setNombre(txtNombre.getText());
-        productoDTO.setFchNacimiento(txtFNacimiento.getText());
-        productoDTO.setSueldo(0.0);
+        if (productoDTO == null) {
+            productoDTO = new ProductoDTO(null,Long.parseLong(txtCuitDelProveedor.getText()),null,
+                    txtDescripcion.getText(),Float.parseFloat(txtPrecioPorUnidad.getText()),
+                    Integer.parseInt(txtDetallePorUnidad.getText()), TipoRubro.Productos_de_reventa,
+                    TipoImpuestoProducto.IVA_2_5,null);
+        } else {
+            productoDTO = new ProductoDTO(txtId.getText(),Long.parseLong(txtCuitDelProveedor.getText()),
+                    txtRazonSocial.getText(),txtDescripcion.getText(),Float.parseFloat(txtPrecioPorUnidad.getText()),
+                    Integer.parseInt(txtDetallePorUnidad.getText()), TipoRubro.Productos_de_reventa,
+                    TipoImpuestoProducto.IVA_2_5,formatter.parse(txtFechaDeCreacion.getText()));
+        }
 
-         */
     }
 
     private void asignarDatosForm() {
-        /*
-        txtDNI.setText(productoDTO.getDni());
-        txtApellido.setText(productoDTO.getApellido());
-        txtNombre.setText(productoDTO.getNombre());
-        txtFNacimiento.setText(productoDTO.getFchNacimiento());
-        txtSueldo.setValue(productoDTO.getSueldo());
-        */
+        SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy", Locale.ENGLISH);
+
+        txtId.setText(productoDTO.id);
+        txtId.setEnabled(false);
+
+        txtFechaDeCreacion.setText(formatter.format(productoDTO.fechaDeCreacion));
+        txtFechaDeCreacion.setEnabled(false);
+
+        txtCuitDelProveedor.setText(productoDTO.cuitDelProveedor.toString());
+        txtCuitDelProveedor.setEnabled(false);
+
+        txtRazonSocial.setText(productoDTO.razonSocial);
+        txtRazonSocial.setEnabled(false);
+
+        txtDescripcion.setText(productoDTO.descripcion);
+        txtPrecioPorUnidad.setText(String.format("%.2f",productoDTO.precioPorUnidad));
+        txtDetallePorUnidad.setText(String.valueOf(productoDTO.detallePorUnidad));
+        txtRubro.setText(productoDTO.rubro.toString());
+        txtIVA.setText(productoDTO.IVA.toString());
     }
 
+    public ProductoDTO getProductoDTO() {
+        return productoDTO;
+    }
     public void setProductoDTO(ProductoDTO productoDTO) {
         this.productoDTO = productoDTO;
-        asignarDatosForm();
+        if (productoDTO != null)
+            asignarDatosForm();
     }
 
     public ModalResult getModalResult() {

@@ -72,7 +72,7 @@ public class ProductoTableModel extends AbstractTableModel{
 	}
 	
 	public void agregar(ProductoDTO productoDTO) throws Exception {
-		proveedorController.agregarProductoDeProveedor(productoDTO);
+		proveedorController.actualizarProductoDeProveedor(productoDTO);
 		actualizarProductos();
 		fireTableDataChanged();
 	}
