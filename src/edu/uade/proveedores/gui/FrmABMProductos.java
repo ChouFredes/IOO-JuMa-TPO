@@ -37,7 +37,6 @@ public class FrmABMProductos extends JDialog {
             ProductoABM dialog = new ProductoABM(frame);
             dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
             dialog.setVisible(true);
-            //JOptionPane.showMessageDialog(null, "termineeee");
             if (dialog.getModalResult() == ModalResult.OK)
                 tableModel.agregar(dialog.getProductoDTO());
 
@@ -55,6 +54,8 @@ public class FrmABMProductos extends JDialog {
                 dialog.setVisible(true);
                 if (dialog.getModalResult() == ModalResult.OK)
                     tableModel.agregar(dialog.getProductoDTO());
+            } else {
+                JOptionPane.showMessageDialog(null, "Seleccione un producto para modificar");
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -65,6 +66,8 @@ public class FrmABMProductos extends JDialog {
         try {
             if (tableProductos.getSelectedRow() > -1) {
                 tableModel.eliminar(tableProductos.getSelectedRow());
+            } else {
+                JOptionPane.showMessageDialog(null, "Seleccione un producto para eliminar");
             }
         } catch (Exception e) {
             e.printStackTrace();

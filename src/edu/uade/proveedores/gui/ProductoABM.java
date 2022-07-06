@@ -64,11 +64,15 @@ public class ProductoABM extends JDialog {
         txtId = new JTextField();
         txtId.setColumns(10);
         txtId.setEnabled(false);
+        lblId.setVisible(false);
+        txtId.setVisible(false);
 
         lblFechaDeCreacion = new JLabel("Fecha de creacion");
         txtFechaDeCreacion = new JFormattedTextField();
         txtFechaDeCreacion.setColumns(10);
         txtFechaDeCreacion.setEnabled(false);
+        lblFechaDeCreacion.setVisible(false);
+        txtFechaDeCreacion.setVisible(false);
 
         lblCuitDelProveedor = new JLabel("Cuit");
         txtCuitDelProveedor = new JTextField();
@@ -310,9 +314,13 @@ public class ProductoABM extends JDialog {
 
         txtId.setText(productoDTO.id);
         txtId.setEnabled(false);
+        lblId.setVisible(false);
+        txtId.setVisible(false);
 
         txtFechaDeCreacion.setText(formatter.format(productoDTO.fechaDeCreacion));
         txtFechaDeCreacion.setEnabled(false);
+        lblFechaDeCreacion.setVisible(false);
+        txtFechaDeCreacion.setVisible(false);
 
         txtCuitDelProveedor.setText(productoDTO.cuitDelProveedor.toString());
         txtCuitDelProveedor.setEnabled(false);
