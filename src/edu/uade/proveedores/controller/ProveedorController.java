@@ -113,7 +113,7 @@ public class ProveedorController {
             }
         }
 
-        this.actualizarProductos(productoDTO.cuitDelProveedor);
+        this.actualizarProveedores();
     }
 
     public void eliminarProductoDeProveedor(ProductoDTO productoDTO) throws Exception {
@@ -136,14 +136,18 @@ public class ProveedorController {
             productoDao.delete(productoDTO.id);
         }
 
-        this.actualizarProductos(productoDTO.cuitDelProveedor);
+        this.actualizarProveedores();
     }
 
+ /*
     private void actualizarProductos(Long cuit) throws Exception {
+        int indiceDeProveedor = -1;
         for (Proveedor proveedor:proveedores){
             if (proveedor.getCuit().equals(cuit)) {
-                proveedor.setProductos((new ProductoDao()).getAll());
+                indiceDeProveedor = proveedores.indexOf(proveedor);
             }
         }
     }
+
+  */
 }

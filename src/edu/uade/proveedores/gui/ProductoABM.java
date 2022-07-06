@@ -1,18 +1,20 @@
 package edu.uade.proveedores.gui;
 
+import edu.uade.proveedores.controller.ProveedorController;
 import edu.uade.proveedores.dto.ProductoDTO;
 import edu.uade.proveedores.enumeration.TipoImpuestoProducto;
 import edu.uade.proveedores.enumeration.TipoRubro;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
-import javax.swing.text.DefaultFormatterFactory;
-import javax.swing.text.MaskFormatter;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Locale;
 
 import static java.lang.Long.parseLong;
@@ -32,49 +34,98 @@ public class ProductoABM extends JDialog {
     private JTextField txtIVA;
     private ProductoDTO productoDTO;
     private ModalResult modalResult;
+    private JComboBox cbProveedor;
+    private JComboBox cbRubro;
+    private JComboBox cbIVA;
+    private ArrayList<Long> cuits;
+    private ArrayList<String> tipoRubros;
+    private ArrayList<String> tipoImpuestoProductos;
+    private Long cuitItem;
+    private String tipoImpuestoProductoItem;
+    private String tipoRubroItem;
+    JLabel lblId;
+    JLabel lblFechaDeCreacion;
+    JLabel lblCuitDelProveedor;
+    JLabel lblRazonSocial;
+    JLabel lblDescripcion;
+    JLabel lblPrecioPorUnidad;
+    JLabel lblDetallePorUnidad;
+    JLabel lblRubro;
+    JLabel lblIVA;
 
-    private void inicializarControles() {
+
+    private void inicializarControles() throws Exception {
         setBounds(300, 300, 450, 450);
         getContentPane().setLayout(new BorderLayout());
         contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
         getContentPane().add(contentPanel, BorderLayout.CENTER);
 
-        JLabel lblId = new JLabel("Id");
+        lblId = new JLabel("Id");
         txtId = new JTextField();
         txtId.setColumns(10);
+        txtId.setEnabled(false);
 
-        JLabel lblFechaDeCreacion = new JLabel("Fecha de creacion");
+        lblFechaDeCreacion = new JLabel("Fecha de creacion");
         txtFechaDeCreacion = new JFormattedTextField();
+        txtFechaDeCreacion.setColumns(10);
+        txtFechaDeCreacion.setEnabled(false);
 
-        JLabel lblCuitDelProveedor = new JLabel("Cuit");
+        lblCuitDelProveedor = new JLabel("Cuit");
         txtCuitDelProveedor = new JTextField();
         txtCuitDelProveedor.setColumns(10);
 
-        JLabel lblRazonSocial = new JLabel("Razon Social");
+        cbProveedor = new JComboBox();
+        inicializarCboProveedores();
+        cbProveedor.addItemListener(new ItemListener() {
+            @Override
+            public void itemStateChanged(ItemEvent e) {
+                cuitItem = (Long) cbProveedor.getSelectedItem();
+            }
+        });
+
+        lblRazonSocial = new JLabel("Razon Social");
         txtRazonSocial = new JTextField();
         txtRazonSocial.setColumns(10);
+        lblRazonSocial.setVisible(false);
+        txtRazonSocial.setVisible(false);
 
-        JLabel lblDescripcion = new JLabel("Descripcion");
+        lblDescripcion = new JLabel("Descripcion");
         txtDescripcion = new JTextField();
         txtDescripcion.setColumns(10);
 
-        JLabel lblPrecioPorUnidad = new JLabel("Precio Por Unidad");
+        lblPrecioPorUnidad = new JLabel("Precio Por Unidad");
         txtPrecioPorUnidad = new JFormattedTextField();
+        txtPrecioPorUnidad.setColumns(10);
 
-        JLabel lblDetallePorUnidad = new JLabel("Detalle por unidad");
+        lblDetallePorUnidad = new JLabel("Detalle por unidad");
         txtDetallePorUnidad = new JTextField();
         txtDetallePorUnidad.setColumns(10);
 
-        JLabel lblRubro = new JLabel("Rubro");
+        lblRubro = new JLabel("Rubro");
         txtRubro = new JTextField();
         txtRubro.setColumns(10);
 
-        JLabel lblIVA = new JLabel("IVA");
+        cbRubro = new JComboBox();
+        inicializarCboRubro();
+        cbRubro.addItemListener(new ItemListener() {
+            @Override
+            public void itemStateChanged(ItemEvent e) {
+                tipoRubroItem = cbRubro.getSelectedItem().toString();
+            }
+        });
+
+        lblIVA = new JLabel("IVA");
         txtIVA = new JTextField();
         txtIVA.setColumns(10);
 
-        JCheckBox aaaachcSindicalizado = new JCheckBox("Sindicalizado");
-
+        cbIVA = new JComboBox();
+        inicializarCboIVA();
+        cbIVA.addItemListener(new ItemListener() {
+            @Override
+            public void itemStateChanged(ItemEvent e) {
+                tipoImpuestoProductoItem = cbIVA.getSelectedItem().toString();
+            }
+        });
 
         GroupLayout gl_contentPanel = new GroupLayout(contentPanel);
         gl_contentPanel.setHorizontalGroup(
@@ -95,13 +146,13 @@ public class ProductoABM extends JDialog {
                                 .addGroup(gl_contentPanel.createParallelGroup(GroupLayout.Alignment.LEADING)
                                         .addComponent(txtId, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                                         .addComponent(txtFechaDeCreacion, GroupLayout.Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 91, Short.MAX_VALUE)
-                                        .addComponent(txtCuitDelProveedor, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(cbProveedor, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                                         .addComponent(txtRazonSocial, GroupLayout.PREFERRED_SIZE, 250, GroupLayout.PREFERRED_SIZE)
                                         .addComponent(txtDescripcion, GroupLayout.PREFERRED_SIZE, 250, GroupLayout.PREFERRED_SIZE)
                                         .addComponent(txtPrecioPorUnidad, GroupLayout.Alignment.LEADING)
                                         .addComponent(txtDetallePorUnidad, GroupLayout.PREFERRED_SIZE, 250, GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(txtRubro, GroupLayout.PREFERRED_SIZE, 250, GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(txtIVA, GroupLayout.PREFERRED_SIZE, 250, GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(cbRubro, GroupLayout.PREFERRED_SIZE, 250, GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(cbIVA, GroupLayout.PREFERRED_SIZE, 250, GroupLayout.PREFERRED_SIZE)
                                 )
                                 .addContainerGap(108, Short.MAX_VALUE))
         );
@@ -119,7 +170,7 @@ public class ProductoABM extends JDialog {
                                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(gl_contentPanel.createParallelGroup(GroupLayout.Alignment.BASELINE)
                                         .addComponent(lblCuitDelProveedor)
-                                        .addComponent(txtCuitDelProveedor, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(cbProveedor, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(gl_contentPanel.createParallelGroup(GroupLayout.Alignment.BASELINE)
                                         .addComponent(lblRazonSocial)
@@ -139,11 +190,11 @@ public class ProductoABM extends JDialog {
                                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(gl_contentPanel.createParallelGroup(GroupLayout.Alignment.BASELINE)
                                         .addComponent(lblRubro)
-                                        .addComponent(txtRubro, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(cbRubro, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(gl_contentPanel.createParallelGroup(GroupLayout.Alignment.BASELINE)
                                         .addComponent(lblIVA)
-                                        .addComponent(txtIVA, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(cbIVA, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                                 .addContainerGap(60, Short.MAX_VALUE))
         );
@@ -184,6 +235,37 @@ public class ProductoABM extends JDialog {
 
     }
 
+    private void inicializarCboIVA() throws Exception {
+        tipoImpuestoProductos = new ArrayList<>();
+        for (TipoImpuestoProducto tipoImpuesto:TipoImpuestoProducto.values()) {
+            tipoImpuestoProductos.add(String.valueOf(tipoImpuesto));
+        }
+
+        DefaultComboBoxModel modelTipoIVAProducto = new DefaultComboBoxModel();
+        modelTipoIVAProducto.addAll(tipoImpuestoProductos);
+        cbIVA.setModel(modelTipoIVAProducto);
+    }
+
+    private void inicializarCboRubro() throws Exception {
+        tipoRubros = new ArrayList<>();
+        for (TipoRubro tipoRubro:TipoRubro.values()) {
+            tipoRubros.add(String.valueOf(tipoRubro));
+        }
+
+        DefaultComboBoxModel modelTipoRubro = new DefaultComboBoxModel();
+        modelTipoRubro.addAll(tipoRubros);
+        cbRubro.setModel(modelTipoRubro);
+    }
+
+    private void inicializarCboProveedores() throws Exception {
+        cuits = new ArrayList<>();
+        cuits = ProveedorController.getInstance().obtenerCuitProveedores();
+
+        DefaultComboBoxModel modelProveedores = new DefaultComboBoxModel();
+        modelProveedores.addAll(cuits);
+        cbProveedor.setModel(modelProveedores);
+    }
+
     private void asignarFormato() {
         try {
             try {
@@ -199,7 +281,7 @@ public class ProductoABM extends JDialog {
         }
     }
 
-    public ProductoABM(JFrame frame) {
+    public ProductoABM(JFrame frame) throws Exception {
         super(frame, "Producto", true);
         setLocationRelativeTo(frame);
         inicializarControles();
@@ -210,15 +292,15 @@ public class ProductoABM extends JDialog {
         SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy", Locale.ENGLISH);
 
         if (productoDTO == null) {
-            productoDTO = new ProductoDTO(null,Long.parseLong(txtCuitDelProveedor.getText()),null,
+            productoDTO = new ProductoDTO(null,Long.parseLong(cbProveedor.getSelectedItem().toString()),null,
                     txtDescripcion.getText(),Float.parseFloat(txtPrecioPorUnidad.getText()),
-                    Integer.parseInt(txtDetallePorUnidad.getText()), TipoRubro.Productos_de_reventa,
-                    TipoImpuestoProducto.IVA_2_5,null);
+                    Integer.parseInt(txtDetallePorUnidad.getText()), TipoRubro.valueOf(cbRubro.getSelectedItem().toString()),
+                    TipoImpuestoProducto.valueOf(cbIVA.getSelectedItem().toString()),null);
         } else {
-            productoDTO = new ProductoDTO(txtId.getText(),Long.parseLong(txtCuitDelProveedor.getText()),
+            productoDTO = new ProductoDTO(txtId.getText(),Long.parseLong(cbProveedor.getSelectedItem().toString()),
                     txtRazonSocial.getText(),txtDescripcion.getText(),Float.parseFloat(txtPrecioPorUnidad.getText()),
-                    Integer.parseInt(txtDetallePorUnidad.getText()), TipoRubro.Productos_de_reventa,
-                    TipoImpuestoProducto.IVA_2_5,formatter.parse(txtFechaDeCreacion.getText()));
+                    Integer.parseInt(txtDetallePorUnidad.getText()), TipoRubro.valueOf(cbRubro.getSelectedItem().toString()),
+                    TipoImpuestoProducto.valueOf(cbIVA.getSelectedItem().toString()),formatter.parse(txtFechaDeCreacion.getText()));
         }
 
     }
@@ -235,14 +317,24 @@ public class ProductoABM extends JDialog {
         txtCuitDelProveedor.setText(productoDTO.cuitDelProveedor.toString());
         txtCuitDelProveedor.setEnabled(false);
 
+        cbProveedor.setSelectedItem(productoDTO.cuitDelProveedor);
+        cbProveedor.setEnabled(false);
+
         txtRazonSocial.setText(productoDTO.razonSocial);
         txtRazonSocial.setEnabled(false);
+        lblRazonSocial.setVisible(true);
+        txtRazonSocial.setVisible(true);
 
         txtDescripcion.setText(productoDTO.descripcion);
         txtPrecioPorUnidad.setText(String.format("%.2f",productoDTO.precioPorUnidad));
         txtDetallePorUnidad.setText(String.valueOf(productoDTO.detallePorUnidad));
+
         txtRubro.setText(productoDTO.rubro.toString());
+        cbRubro.setSelectedItem(productoDTO.rubro.toString());
+
         txtIVA.setText(productoDTO.IVA.toString());
+        cbIVA.setSelectedItem(productoDTO.IVA.toString());
+
     }
 
     public ProductoDTO getProductoDTO() {

@@ -4,8 +4,10 @@ import edu.uade.proveedores.controller.ProveedorController;
 import edu.uade.proveedores.dto.ProductoDTO;
 
 import javax.swing.table.AbstractTableModel;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Locale;
 
 ;
 
@@ -21,7 +23,7 @@ public class ProductoTableModel extends AbstractTableModel{
 	protected String[] columnNames = new String[] { "id", "cuit", "razonSocial", "descripcion", "precioPorUnidad",
 			"detallePorUnidad", "rubro", "IVA", "fechaDeCreacion"};
 	protected Class[] columnClasses = new Class[] { String.class, Long.class, String.class, String.class, Float.class,
-			int.class, String.class, String.class, Date.class};
+			int.class, String.class, String.class, String.class};
 
 
 	public String getColumnName(int col) { return columnNames[col]; } 
@@ -56,6 +58,8 @@ public class ProductoTableModel extends AbstractTableModel{
     
 	@Override
 	public Object getValueAt(int rowIndex, int columnIndex) {
+		SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy", Locale.ENGLISH);
+
 		switch(columnIndex) 
 		{ 
 			case 0: return productos.get(rowIndex).id;
@@ -66,7 +70,7 @@ public class ProductoTableModel extends AbstractTableModel{
 			case 5: return productos.get(rowIndex).detallePorUnidad;
 			case 6: return productos.get(rowIndex).rubro;
 			case 7: return productos.get(rowIndex).IVA;
-			case 8: return productos.get(rowIndex).fechaDeCreacion;
+			case 8: return formatter.format(productos.get(rowIndex).fechaDeCreacion);
 			default: return null; 
 		}
 	}

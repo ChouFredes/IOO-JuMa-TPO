@@ -55,7 +55,6 @@ public class FrmABMProductos extends JDialog {
                 dialog.setVisible(true);
                 if (dialog.getModalResult() == ModalResult.OK)
                     tableModel.agregar(dialog.getProductoDTO());
-                    //tableModel.refresh();
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -110,7 +109,6 @@ public class FrmABMProductos extends JDialog {
         btnEliminar.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent arg0) { eliminarProducto(); }
         });
-
 
         JButton btnModificar = new JButton("Modificar");
         btnModificar.addActionListener(new ActionListener() {

@@ -28,7 +28,7 @@ public class FrmTotalDeudaProveedor extends  JDialog{
     public FrmTotalDeudaProveedor(Window owner, String titulo) throws Exception {
         super(owner, titulo);
         this.setModal(true);
-        this.setSize(320, 320);
+        this.setSize(500, 400);
         this.setContentPane(PnlPrincipal);
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         this.setLocationRelativeTo(null);
@@ -55,8 +55,7 @@ public class FrmTotalDeudaProveedor extends  JDialog{
             public void actionPerformed(ActionEvent e) {
                 try {
                     data = convertDtoToData(ProveedorController.getInstance().obtenerDeudaPorProveedor(cuitItem));
-                    tableModel.setDataVector(data, columnNames);
-                    tableModel.fireTableDataChanged();
+                    actualizarGrilla(data);
                 } catch (Exception ex) {
                     throw new RuntimeException(ex);
                 }
@@ -67,7 +66,8 @@ public class FrmTotalDeudaProveedor extends  JDialog{
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
-                    inicializarCombo();
+                    cbProveedores.setSelectedIndex(0);
+                    actualizarGrilla(null);
                 } catch (Exception ex) {
                     throw new RuntimeException(ex);
                 }
@@ -75,13 +75,21 @@ public class FrmTotalDeudaProveedor extends  JDialog{
         });
     }
 
-    private void inicializarCombo() throws Exception {
+    private void actualizarGrilla(Object[][] data) {
+        tableModel.setDataVector(data, columnNames);
+        tableModel.fireTableDataChanged();
+    }
 
-        cuits = ProveedorController.getInstance().obtenerCuitProveedores();
+    private void inicializarCombo() throws Exception {
+        cuits = new ArrayList<>();
+        cuits.add(null);
+        for (Long cuit : ProveedorController.getInstance().obtenerCuitProveedores()) {
+            cuits.add(cuit);
+        };
+
         DefaultComboBoxModel modelProveedores = new DefaultComboBoxModel();
         modelProveedores.addAll(cuits);
         cbProveedores.setModel(modelProveedores);
-
     }
 
     public Object[][] convertDtoToData(List<DeudaDeProveedorDTO> list) {

@@ -34,7 +34,7 @@ public class FrmFacturasPorFecha extends JDialog {
     public FrmFacturasPorFecha(Window owner, String titulo) throws Exception {
         super(owner, titulo);
         this.setModal(true);
-        this.setSize(320, 320);
+        this.setSize(500, 400);
         this.setContentPane(PnlPrincipal);
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         this.setLocationRelativeTo(null);
@@ -96,8 +96,7 @@ public class FrmFacturasPorFecha extends JDialog {
 
         for (Long cuit : ProveedorController.getInstance().obtenerCuitProveedores()) {
             cuits.add(cuit);
-        }
-        ;
+        };
 
         DefaultComboBoxModel modelProveedores = new DefaultComboBoxModel();
         modelProveedores.addAll(cuits);
@@ -120,10 +119,11 @@ public class FrmFacturasPorFecha extends JDialog {
     }
 
     public Object[][] convertDtoToData(List<DocumentoComercialDTO> list) {
+        SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
         Object[][] data = new Object[list.size()][5];
         for (int i = 0; i < list.size(); i++) {
             data[i][0] = list.get(i).id;
-            data[i][1] = list.get(i).fechaDeEmision.toString();
+            data[i][1] = formatter.format(list.get(i).fechaDeEmision);
             data[i][2] = list.get(i).tipoDeDocumento;
             data[i][3] = list.get(i).numeroDeComprobante;
         }
